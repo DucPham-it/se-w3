@@ -1,0 +1,2095 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BT04 · Mini-SRS — Phòng khám An Tâm | Nhóm 13</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a2e2a;
+  --ink-soft: #3d524c;
+  --muted: #5e726b;
+  --line: #c8d5cf;
+  --line-soft: #e2ebe6;
+  --paper: #f7faf8;
+  --surface: #ffffff;
+  --teal: #0d6e63;
+  --teal-deep: #08574f;
+  --teal-soft: #e6f3f0;
+  --accent: #c45c26;
+  --accent-soft: #fdf0e8;
+  --code-bg: #eef5f2;
+  --shadow: 0 1px 0 rgba(13, 110, 99, 0.06), 0 12px 40px rgba(26, 46, 42, 0.06);
+  --radius: 10px;
+  --sidebar-w: 280px;
+  --max: 920px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: var(--ink);
+  background:
+    radial-gradient(ellipse 80% 50% at 0% 0%, rgba(13, 110, 99, 0.07), transparent 55%),
+    radial-gradient(ellipse 60% 40% at 100% 10%, rgba(196, 92, 38, 0.05), transparent 50%),
+    linear-gradient(180deg, #eef5f2 0%, var(--paper) 180px, var(--paper) 100%);
+  min-height: 100vh;
+}
+
+/* Layout */
+.layout {
+  display: grid;
+  grid-template-columns: var(--sidebar-w) 1fr;
+  gap: 0;
+  min-height: 100vh;
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 1.75rem 1.25rem 2rem;
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(12px);
+  border-right: 1px solid var(--line-soft);
+}
+
+.sidebar-brand {
+  font-family: Fraunces, Georgia, serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--teal-deep);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.35rem;
+}
+
+.sidebar-meta {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.sidebar h2 {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+}
+
+.toc {
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
+.toc ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.toc > ul > li {
+  margin-bottom: 0.15rem;
+}
+
+.toc ul ul {
+  margin: 0.2rem 0 0.45rem 0.65rem;
+  padding-left: 0.55rem;
+  border-left: 2px solid var(--line-soft);
+}
+
+.toc a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  display: block;
+  padding: 0.28rem 0.4rem;
+  border-radius: 6px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.toc a:hover {
+  color: var(--teal);
+  background: var(--teal-soft);
+}
+
+.toc ul ul a {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.main {
+  padding: 2.5rem 2.5rem 4rem;
+  max-width: calc(var(--max) + 5rem);
+}
+
+.sheet {
+  background: var(--surface);
+  border: 1px solid var(--line-soft);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 2.75rem 3rem 3.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.sheet::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--teal) 0%, #2a9d8f 55%, var(--accent) 100%);
+}
+
+/* Typography in content */
+.content > h1:first-child {
+  font-family: Fraunces, Georgia, serif;
+  font-size: clamp(1.65rem, 2.4vw, 2.15rem);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  color: var(--teal-deep);
+  margin: 0 0 1rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.content h1 {
+  font-family: Fraunces, Georgia, serif;
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: var(--teal-deep);
+  margin: 2.75rem 0 1rem;
+  letter-spacing: -0.02em;
+  scroll-margin-top: 1.5rem;
+}
+
+.content h2 {
+  font-family: Fraunces, Georgia, serif;
+  font-size: 1.22rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 2.1rem 0 0.85rem;
+  padding-top: 0.35rem;
+  scroll-margin-top: 1.5rem;
+}
+
+.content h3 {
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: var(--teal);
+  margin: 1.6rem 0 0.65rem;
+  scroll-margin-top: 1.5rem;
+}
+
+.content h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  margin: 1.25rem 0 0.5rem;
+}
+
+.content p {
+  margin: 0.65rem 0;
+  color: var(--ink);
+}
+
+.content strong {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.content ul, .content ol {
+  margin: 0.5rem 0 0.9rem;
+  padding-left: 1.35rem;
+}
+
+.content li {
+  margin: 0.28rem 0;
+}
+
+.content li::marker {
+  color: var(--teal);
+}
+
+/* Tables */
+.table-wrap {
+  overflow-x: auto;
+  margin: 1rem 0 1.35rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.content table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.86rem;
+  line-height: 1.5;
+  min-width: 520px;
+}
+
+.content thead th {
+  background: linear-gradient(180deg, var(--teal-soft), #dff0ec);
+  color: var(--teal-deep);
+  font-weight: 600;
+  text-align: left;
+  padding: 0.7rem 0.85rem;
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+
+.content tbody td {
+  padding: 0.65rem 0.85rem;
+  border-bottom: 1px solid var(--line-soft);
+  vertical-align: top;
+  color: var(--ink-soft);
+}
+
+.content tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.content tbody tr:hover td {
+  background: rgba(13, 110, 99, 0.035);
+}
+
+/* Inline code / IDs */
+.content code {
+  font-family: "Be Vietnam Pro", ui-monospace, monospace;
+  font-size: 0.84em;
+  background: var(--code-bg);
+  color: var(--teal-deep);
+  padding: 0.12em 0.4em;
+  border-radius: 4px;
+  border: 1px solid #d5e6e0;
+  font-weight: 500;
+}
+
+.content hr {
+  border: none;
+  height: 1px;
+  background: var(--line);
+  margin: 2rem 0;
+}
+
+/* Team badge under title */
+.team-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--teal-soft);
+  color: var(--teal-deep);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  margin: 0.25rem 0 1.25rem;
+  border: 1px solid #c5e0d9;
+}
+
+.footer-note {
+  margin-top: 2.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line-soft);
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* Mobile */
+@media (max-width: 960px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  .sidebar {
+    position: relative;
+    height: auto;
+    max-height: none;
+    border-right: none;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .toc > ul > li > ul {
+    display: none;
+  }
+  .main {
+    padding: 1.25rem 1rem 3rem;
+  }
+  .sheet {
+    padding: 1.5rem 1.15rem 2rem;
+    border-radius: 12px;
+  }
+}
+
+@media print {
+  body { background: white; }
+  .sidebar { display: none; }
+  .layout { display: block; }
+  .sheet { box-shadow: none; border: none; padding: 0; }
+  .main { max-width: none; padding: 0; }
+}
+</style>
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-brand">An Tâm · Mini-SRS</div>
+    <div class="sidebar-meta">BT04 · Nhóm 13<br>Hệ thống quản lý lịch khám</div>
+    <h2>Mục lục</h2>
+    <nav class="toc" aria-label="Mục lục">
+      <div class="toc">
+<ul>
+<li><a href="#01-quy-uoc-nguon">0.1 Quy ước nguồn</a></li>
+<li><a href="#11-boi-canh-va-hien-trang-a-biet">1.1 Bối cảnh và hiện trạng đã biết</a></li>
+<li><a href="#12-phat-bieu-van-e">1.2 Phát biểu vấn đề</a></li>
+<li><a href="#13-muc-tieu-he-thong">1.3 Mục tiêu hệ thống</a></li>
+<li><a href="#14-gia-tri-mong-oi">1.4 Giá trị mong đợi</a></li>
+<li><a href="#15-stakeholder">1.5 Stakeholder</a></li>
+<li><a href="#16-in-scope">1.6 In-Scope</a><ul>
+<li><a href="#a-quan-ly-lich-hen">A. Quản lý lịch hẹn</a></li>
+<li><a href="#b-tra-cuu-kha-nang-at-lich">B. Tra cứu khả năng đặt lịch</a></li>
+<li><a href="#c-quan-ly-lich-lam-viec-cua-bac-si">C. Quản lý lịch làm việc của bác sĩ</a></li>
+<li><a href="#d-tiep-nhan-benh-nhan">D. Tiếp nhận bệnh nhân</a></li>
+<li><a href="#e-bac-si-theo-doi-lich-kham">E. Bác sĩ theo dõi lịch khám</a></li>
+<li><a href="#f-xu-ly-thay-oi-lich">F. Xử lý thay đổi lịch</a></li>
+<li><a href="#g-quan-ly-quyen-truy-cap-co-ban">G. Quản lý quyền truy cập cơ bản</a></li>
+</ul>
+</li>
+<li><a href="#17-out-scope">1.7 Out-Scope</a><ul>
+<li><a href="#a-thanh-toan-vien-phi-truc-tuyen">A. Thanh toán viện phí trực tuyến</a></li>
+<li><a href="#b-ho-so-thanh-toan-hoan-tien-khi-huy">B. Hồ sơ thanh toán, hoàn tiền khi hủy</a></li>
+<li><a href="#c-he-thong-phan-bo-bac-si-theo-trieu-chung">C. Hệ thống phân bổ bác sĩ theo triệu chứng.</a></li>
+<li><a href="#d-kham-truc-tuyen-telemedicine">D. Khám trực tuyến / Telemedicine</a></li>
+<li><a href="#e-thanh-toan-truc-tuyen-va-hoan-tien">E. Thanh toán trực tuyến và hoàn tiền</a></li>
+<li><a href="#f-benh-an-ien-tu-lam-sang-ay-u">F. Bệnh án điện tử lâm sàng đầy đủ</a></li>
+</ul>
+</li>
+<li><a href="#18-thuat-ngu-nghiep-vu">1.8 Thuật ngữ nghiệp vụ</a></li>
+<li><a href="#19-tu-viet-tat">1.9 Từ viết tắt</a></li>
+<li><a href="#21-muc-tieu">2.1 Mục tiêu</a></li>
+<li><a href="#22-ky-thuat-thu-thap-yeu-cau">2.2 Kỹ thuật thu thập yêu cầu</a><ul>
+<li><a href="#221-phong-van">2.2.1 Phỏng vấn</a></li>
+<li><a href="#222-bang-cau-hoi">2.2.2 Bảng câu hỏi</a></li>
+<li><a href="#223-quan-sat">2.2.3 Quan sát</a></li>
+</ul>
+</li>
+<li><a href="#23-bo-cau-hoi-khao-sat">2.3 Bộ câu hỏi khảo sát</a><ul>
+<li><a href="#231-cau-hoi-mo">2.3.1 Câu hỏi mở</a></li>
+<li><a href="#232-cau-hoi-ong">2.3.2 Câu hỏi đóng</a></li>
+<li><a href="#233-cau-hoi-ngoai-le-va-nfr">2.3.3 Câu hỏi ngoại lệ và NFR</a></li>
+</ul>
+</li>
+<li><a href="#31-gia-inh-a-ghi-nhan">3.1 Giả định đã ghi nhãn</a></li>
+<li><a href="#31-gia-inh-a-ghi-nhan">3.2 Câu hỏi chưa được stakeholder trả lời</a></li>
+<li><a href="#33-dependencies">3.3 Dependencies</a></li>
+<li><a href="#51-yeu-cau-chuc-nang">5.1 Yêu cầu chức năng</a></li>
+<li><a href="#52-yeu-cau-phi-chuc-nang">5.2 Yêu cầu phi chức năng</a><ul>
+<li><a href="#nhom-a-hieu-nang-va-quy-mo">Nhóm A — Hiệu năng và quy mô</a></li>
+<li><a href="#nhom-b-bao-mat-va-du-lieu">Nhóm B — Bảo mật và dữ liệu</a></li>
+<li><a href="#nhom-c-kha-dung">Nhóm C — Khả dụng</a></li>
+</ul>
+</li>
+<li><a href="#sc-01-benh-nhan-at-lich-thanh-cong">SC-01 — Bệnh nhân đặt lịch thành công</a><ul>
+<li><a href="#luong-chinh">Luồng chính</a></li>
+<li><a href="#luong-thay-thengoai-le">Luồng thay thế/ngoại lệ</a></li>
+<li><a href="#hau-ieu-kien">Hậu điều kiện</a></li>
+</ul>
+</li>
+<li><a href="#sc-02-khung-gio-hoac-bac-si-khong-con-kha-dung">SC-02 — Khung giờ hoặc bác sĩ không còn khả dụng</a><ul>
+<li><a href="#luong-chinh_1">Luồng chính</a></li>
+<li><a href="#ngoai-le">Ngoại lệ</a></li>
+<li><a href="#hau-ieu-kien_1">Hậu điều kiện</a></li>
+</ul>
+</li>
+<li><a href="#sc-03-benh-nhan-oi-hoac-huy-lich">SC-03 — Bệnh nhân đổi hoặc hủy lịch</a><ul>
+<li><a href="#luong-chinh-oi-lich">Luồng chính — Đổi lịch</a></li>
+<li><a href="#luong-chinh-huy-lich">Luồng chính — Hủy lịch</a></li>
+<li><a href="#ngoai-le_1">Ngoại lệ</a></li>
+<li><a href="#hau-ieu-kien_2">Hậu điều kiện</a></li>
+</ul>
+</li>
+<li><a href="#sc-04-bac-si-xem-danh-sach-lich-kham">SC-04 — Bác sĩ xem danh sách lịch khám</a><ul>
+<li><a href="#luong-chinh_2">Luồng chính</a></li>
+<li><a href="#ngoai-le_2">Ngoại lệ</a></li>
+<li><a href="#hau-ieu-kien_3">Hậu điều kiện</a></li>
+</ul>
+</li>
+<li><a href="#sc-05-bac-si-nghi-ot-xuat">SC-05 — Bác sĩ nghỉ đột xuất</a><ul>
+<li><a href="#luong-chinh_3">Luồng chính</a></li>
+<li><a href="#ngoai-le_3">Ngoại lệ</a></li>
+<li><a href="#hau-ieu-kien_4">Hậu điều kiện</a></li>
+</ul>
+</li>
+<li><a href="#sc-06-tiep-nhan-benh-nhan-en-kham">SC-06 — Tiếp nhận bệnh nhân đến khám</a><ul>
+<li><a href="#luong-chinh_4">Luồng chính</a></li>
+<li><a href="#ngoai-le_4">Ngoại lệ</a></li>
+<li><a href="#hau-ieu-kien_5">Hậu điều kiện</a></li>
+</ul>
+</li>
+<li><a href="#71-phuong-phap-peer-review">7.1 Phương pháp peer review</a></li>
+<li><a href="#72-van-e-phat-hien-va-quyet-inh-xu-ly">7.2 Vấn đề phát hiện và quyết định xử lý</a></li>
+<li><a href="#73-ket-luan-kiem-nghiem">7.3 Kết luận kiểm nghiệm</a></li>
+<li><a href="#tc-01-at-lich-thanh-cong">TC-01 — Đặt lịch thành công</a></li>
+<li><a href="#tc-02-tu-choi-khi-slot-a-u-suc-chua">TC-02 — Từ chối khi slot đã đủ sức chứa</a></li>
+<li><a href="#tc-03-oi-lich-thanh-cong">TC-03 — Đổi lịch thành công</a></li>
+<li><a href="#tc-04-oi-lich-that-bai-do-canh-tranh-ong-thoi">TC-04 — Đổi lịch thất bại do cạnh tranh đồng thời</a></li>
+<li><a href="#tc-05-huy-lich-va-giai-phong-slot">TC-05 — Hủy lịch và giải phóng slot</a></li>
+<li><a href="#tc-06-ghi-nhan-bac-si-nghi">TC-06 — Ghi nhận bác sĩ nghỉ</a></li>
+<li><a href="#tc-07-bac-si-chi-xem-du-lieu-trong-quyen">TC-07 — Bác sĩ chỉ xem dữ liệu trong quyền</a></li>
+<li><a href="#tc-08-kiem-tra-thoi-gian-phan-hoi-prototype">TC-08 — Kiểm tra thời gian phản hồi prototype</a></li>
+<li><a href="#91-noi-dung-thay-oi">9.1 Nội dung thay đổi</a></li>
+<li><a href="#92-phan-tich-tac-ong">9.2 Phân tích tác động</a></li>
+<li><a href="#93-yeu-cau-moisua-oi">9.3 Yêu cầu mới/sửa đổi</a></li>
+<li><a href="#94-scenario-moi">9.4 Scenario mới</a><ul>
+<li><a href="#sc-07-at-lich-kham-truc-tuyen-va-thanh-toan-truoc">SC-07 — Đặt lịch khám trực tuyến và thanh toán trước</a></li>
+</ul>
+</li>
+<li><a href="#95-cau-hoirui-ro-moi-can-lam-ro">9.5 Câu hỏi/rủi ro mới cần làm rõ</a></li>
+</ul>
+</div>
+
+    </nav>
+  </aside>
+  <main class="main">
+    <article class="sheet">
+      <div class="content">
+        <h1 id="bt04-mini-srs-he-thong-quan-ly-lich-kham-phong-kham-an-tam">BT04 · Mini-SRS — Hệ thống quản lý lịch khám Phòng khám An Tâm</h1>
+<p><strong>Nhóm:</strong> 13</p>
+<table>
+<thead>
+<tr>
+<th>MSSV</th>
+<th>Họ Và Tên</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>24120032</td>
+<td>Nguyễn Phan Khánh Đăng</td>
+</tr>
+<tr>
+<td>24120041</td>
+<td>Phạm Võ Đức</td>
+</tr>
+<tr>
+<td>24120043</td>
+<td>Nguyễn Công Dũng</td>
+</tr>
+<tr>
+<td>24120045</td>
+<td>Nguyễn Văn Hạ</td>
+</tr>
+</tbody>
+</table>
+<h1 id="0-quy-uoc-tai-lieu">0. Quy ước tài liệu</h1>
+<h2 id="01-quy-uoc-nguon">0.1 Quy ước nguồn</h2>
+<table>
+<thead>
+<tr>
+<th>Mã</th>
+<th>Nguồn</th>
+<th>Ý nghĩa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>F-CS</code></td>
+<td>Fact from Case Study</td>
+<td>Dữ kiện được cung cấp trực tiếp trong tình huống Phòng khám An Tâm</td>
+</tr>
+<tr>
+<td><code>STK-01</code></td>
+<td>Quản lý phòng khám</td>
+<td>“Tôi muốn bệnh nhân đặt lịch nhanh, không phải gọi nhiều lần.”</td>
+</tr>
+<tr>
+<td><code>STK-02</code></td>
+<td>Bác sĩ</td>
+<td>“Tôi cần biết hôm nay ai đến khám và hồ sơ nào cần chuẩn bị.”</td>
+</tr>
+<tr>
+<td><code>STK-03</code></td>
+<td>Nhân viên tiếp nhận</td>
+<td>“Lịch thay đổi liên tục; nếu sửa ở sổ thì đôi khi người khác không biết.”</td>
+</tr>
+<tr>
+<td><code>STK-04</code></td>
+<td>Bệnh nhân</td>
+<td>“Tôi muốn đổi lịch mà không phải đến tận nơi.”</td>
+</tr>
+<tr>
+<td><code>Q-Oxx</code></td>
+<td>Câu hỏi mở</td>
+<td>Câu hỏi dùng trong khảo sát/phỏng vấn</td>
+</tr>
+<tr>
+<td><code>Q-Cxx</code></td>
+<td>Câu hỏi đóng</td>
+<td>Câu hỏi dùng trong khảo sát/phỏng vấn</td>
+</tr>
+<tr>
+<td><code>Q-Xxx</code></td>
+<td>Câu hỏi ngoại lệ/NFR</td>
+<td>Câu hỏi làm rõ ngoại lệ và yêu cầu phi chức năng</td>
+</tr>
+<tr>
+<td><code>Q-xx</code></td>
+<td>Open Issue</td>
+<td>Câu hỏi chưa có câu trả lời chính thức từ stakeholder</td>
+</tr>
+<tr>
+<td><code>A-xx</code></td>
+<td>Assumption</td>
+<td>Giả định của nhóm, phải được ghi nhãn và xác nhận sau</td>
+</tr>
+<tr>
+<td><code>FR-xx</code></td>
+<td>Functional Requirement</td>
+<td>Yêu cầu chức năng</td>
+</tr>
+<tr>
+<td><code>NFR-xx</code></td>
+<td>Non-functional Requirement</td>
+<td>Yêu cầu phi chức năng</td>
+</tr>
+<tr>
+<td><code>SC-xx</code></td>
+<td>Scenario</td>
+<td>Tình huống sử dụng</td>
+</tr>
+<tr>
+<td><code>TC-xx</code></td>
+<td>Test Scenario</td>
+<td>Kịch bản kiểm nghiệm yêu cầu</td>
+</tr>
+<tr>
+<td><code>REV-xx</code></td>
+<td>Review Finding</td>
+<td>Vấn đề phát hiện trong peer review</td>
+</tr>
+<tr>
+<td><code>CR-xx</code></td>
+<td>Change Request</td>
+<td>Yêu cầu thay đổi chính thức</td>
+</tr>
+</tbody>
+</table>
+<h1 id="1-problem-statement-scope">1. Problem Statement &amp; Scope</h1>
+<h2 id="11-boi-canh-va-hien-trang-a-biet">1.1 Bối cảnh và hiện trạng đã biết</h2>
+<p>Phòng khám An Tâm là phòng khám đa khoa quy mô nhỏ. Dữ kiện tình huống cho biết:</p>
+<ul>
+<li>Có <strong>06 bác sĩ</strong> thuộc nhiều chuyên khoa.</li>
+<li>Có khoảng <strong>80–120 lượt bệnh nhân mỗi ngày</strong>.</li>
+<li>Có <strong>02 nhân viên tiếp nhận mỗi ca</strong>.</li>
+<li>Việc đặt lịch hiện được thực hiện qua <strong>điện thoại và ghi vào sổ</strong>.</li>
+<li>Nhân viên tiếp nhận ghi lịch và <strong>gọi điện xác nhận</strong>.</li>
+<li>Bệnh nhân mới <strong>khai thông tin khi đến phòng khám</strong>.</li>
+<li>Bác sĩ nhận <strong>danh sách lịch khám vào đầu mỗi ca</strong>.</li>
+<li>Khi bác sĩ nghỉ đột xuất, nhân viên phải <strong>gọi từng bệnh nhân</strong> để thông báo.</li>
+</ul>
+<h2 id="12-phat-bieu-van-e">1.2 Phát biểu vấn đề</h2>
+<p>Quy trình hiện tại phụ thuộc nhiều vào điện thoại, sổ giấy và trao đổi thủ công. Điều này làm cho việc cập nhật, tra cứu và phối hợp lịch khó đồng bộ khi lịch thay đổi.</p>
+<p>Các vấn đề được xác định từ tình huống:</p>
+<ol>
+<li>Việc đặt lịch phụ thuộc vào điện thoại và ghi chép thủ công.</li>
+<li>Khi lịch thay đổi, thông tin trên sổ không tự động được đồng bộ cho các bên liên quan.</li>
+<li>Khi bác sĩ nghỉ đột xuất, nhân viên phải liên hệ từng bệnh nhân.</li>
+<li>Bệnh nhân mới chỉ khai thông tin khi đến phòng khám.</li>
+<li>Bác sĩ phụ thuộc vào danh sách được cung cấp vào đầu ca để chuẩn bị.</li>
+</ol>
+<h2 id="13-muc-tieu-he-thong">1.3 Mục tiêu hệ thống</h2>
+<p>Xây dựng hệ thống hỗ trợ <strong>quản lý lịch khám và tiếp nhận bệnh nhân tập trung</strong>, nhằm:</p>
+<ul>
+<li>Giúp nhân viên tiếp nhận quản lý lịch khám tự động thay thủ công, dễ quan sát thay đổi lịch.</li>
+<li>Giúp bác sĩ xem lịch khám, danh sách bệnh nhân và các thông tin cần thiết được cấp quyền để thuận tiện chuẩn bị trước.</li>
+<li>Đồng bộ hoá thông tin, hạn chế xung đột và sai sót khi sắp lịch.</li>
+<li>Giúp bệnh nhân khai báo thông tin, tự đổi, hủy lịch từ xa, và hệ thống tự cập nhật chỗ trống.</li>
+<li>Giảm các thao tác gọi điện và ghi chép thủ công, tự động hóa thao tác thông báo cho bệnh nhân.</li>
+</ul>
+<h2 id="14-gia-tri-mong-oi">1.4 Giá trị mong đợi</h2>
+<table>
+<thead>
+<tr>
+<th>Đối tượng</th>
+<th>Giá trị mong đợi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bệnh nhân</td>
+<td>Đặt/đổi/hủy lịch thuận tiện hơn; giảm nhu cầu đến trực tiếp chỉ để thay đổi lịch</td>
+</tr>
+<tr>
+<td>Nhân viên tiếp nhận</td>
+<td>Giảm ghi chép và tra cứu thủ công; dễ nhận biết lịch thay đổi</td>
+</tr>
+<tr>
+<td>Bác sĩ</td>
+<td>Có danh sách lịch khám cập nhật để chuẩn bị trước</td>
+</tr>
+<tr>
+<td>Quản lý phòng khám</td>
+<td>Có nguồn thông tin tập trung để theo dõi hoạt động đặt lịch và vận hành</td>
+</tr>
+<tr>
+<td>Phòng khám</td>
+<td>Giảm phụ thuộc vào sổ giấy và trao đổi thủ công</td>
+</tr>
+</tbody>
+</table>
+<h2 id="15-stakeholder">1.5 Stakeholder</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Stakeholder</th>
+<th>Vai trò</th>
+<th>Nhu cầu</th>
+<th>Ảnh hưởng đến hệ thống</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>STK-01</code></td>
+<td>Quản lý phòng khám</td>
+<td>Quản lý vận hành</td>
+<td>Bệnh nhân đặt lịch nhanh, không phải gọi nhiều lần</td>
+<td>Quyết định chính sách, business rule và ưu tiên</td>
+</tr>
+<tr>
+<td><code>STK-02</code></td>
+<td>Bác sĩ</td>
+<td>Thực hiện khám</td>
+<td>Biết bệnh nhân nào đến và thông tin/hồ sơ nào cần thiết</td>
+<td>Trực tiếp sử dụng lịch và danh sách khám</td>
+</tr>
+<tr>
+<td><code>STK-03</code></td>
+<td>Nhân viên tiếp nhận</td>
+<td>Quản lý lịch, tiếp nhận bệnh nhân</td>
+<td>Cần nhìn thấy thay đổi lịch đồng bộ và xử lý lịch hằng ngày</td>
+<td>Người thao tác thường xuyên với lịch</td>
+</tr>
+<tr>
+<td><code>STK-04</code></td>
+<td>Bệnh nhân</td>
+<td>Người sử dụng dịch vụ</td>
+<td>Muốn đổi lịch mà không phải đến tận nơi</td>
+<td>Người tạo, xem và thay đổi lịch hẹn</td>
+</tr>
+</tbody>
+</table>
+<h2 id="16-in-scope">1.6 In-Scope</h2>
+<h3 id="a-quan-ly-lich-hen">A. Quản lý lịch hẹn</h3>
+<ul>
+<li>Tạo lịch.</li>
+<li>Xem lịch.</li>
+<li>Đổi lịch.</li>
+<li>Hủy lịch.</li>
+<li>Theo dõi trạng thái lịch.</li>
+</ul>
+<h3 id="b-tra-cuu-kha-nang-at-lich">B. Tra cứu khả năng đặt lịch</h3>
+<ul>
+<li>Tra cứu chuyên khoa.</li>
+<li>Tra cứu bác sĩ.</li>
+<li>Tra cứu ngày/ca làm việc.</li>
+<li>Tra cứu khung giờ khả dụng.</li>
+</ul>
+<h3 id="c-quan-ly-lich-lam-viec-cua-bac-si">C. Quản lý lịch làm việc của bác sĩ</h3>
+<ul>
+<li>Ghi nhận lịch làm việc.</li>
+<li>Ghi nhận nghỉ/vắng.</li>
+<li>Ngăn đặt lịch khi bác sĩ không khả dụng.</li>
+</ul>
+<h3 id="d-tiep-nhan-benh-nhan">D. Tiếp nhận bệnh nhân</h3>
+<ul>
+<li>Tra cứu bệnh nhân.</li>
+<li>Ghi nhận bệnh nhân đến khám.</li>
+<li>Lưu thông tin cơ bản cần thiết cho việc đặt lịch và tiếp nhận.</li>
+</ul>
+<h3 id="e-bac-si-theo-doi-lich-kham">E. Bác sĩ theo dõi lịch khám</h3>
+<ul>
+<li>Xem lịch theo ngày/ca.</li>
+<li>Xem danh sách bệnh nhân dự kiến.</li>
+<li>Xem các thông tin đã được cấp quyền để chuẩn bị trước.</li>
+</ul>
+<h3 id="f-xu-ly-thay-oi-lich">F. Xử lý thay đổi lịch</h3>
+<ul>
+<li>Ghi nhận lịch thay đổi.</li>
+<li>Xác định các lịch bị ảnh hưởng.</li>
+<li>Thông báo/cập nhật cho các bên theo chính sách được xác nhận.</li>
+</ul>
+<h3 id="g-quan-ly-quyen-truy-cap-co-ban">G. Quản lý quyền truy cập cơ bản</h3>
+<ul>
+<li>Phân quyền theo vai trò.</li>
+<li>Ghi nhận các thao tác thay đổi quan trọng.</li>
+</ul>
+<h2 id="17-out-scope">1.7 Out-Scope</h2>
+<h3 id="a-thanh-toan-vien-phi-truc-tuyen">A. Thanh toán viện phí trực tuyến</h3>
+<ul>
+<li>Thanh toán qua ngân hàng</li>
+<li>Thanh toán qua ví điện tử</li>
+</ul>
+<h3 id="b-ho-so-thanh-toan-hoan-tien-khi-huy">B. Hồ sơ thanh toán, hoàn tiền khi hủy</h3>
+<ul>
+<li>Lưu trữ lịch sử khám bệnh và hồ sơ bệnh nhân</li>
+<li>Bệnh án (bệnh tiền sử, dị ứng thuốc)</li>
+<li>Lịch sử khám bệnh ở bệnh viện an tâm</li>
+</ul>
+<h3 id="c-he-thong-phan-bo-bac-si-theo-trieu-chung">C. Hệ thống phân bổ bác sĩ theo triệu chứng.</h3>
+<ul>
+<li>Bệnh nhân có thể liên lạc bệnh viện để phân chuyên khoa trước thay vì phải đến gặp trực tiếp mới được phân khoa khám</li>
+</ul>
+<h3 id="d-kham-truc-tuyen-telemedicine">D. Khám trực tuyến / Telemedicine</h3>
+<ul>
+<li>Video call hoặc phiên khám trực tuyến.</li>
+<li>Cung cấp đường dẫn/phòng khám online.</li>
+</ul>
+<h3 id="e-thanh-toan-truc-tuyen-va-hoan-tien">E. Thanh toán trực tuyến và hoàn tiền</h3>
+<ul>
+<li>Thanh toán qua ngân hàng hoặc ví điện tử.</li>
+<li>Xử lý giao dịch và hoàn tiền khi hủy.</li>
+</ul>
+<h3 id="f-benh-an-ien-tu-lam-sang-ay-u">F.  Bệnh án điện tử lâm sàng đầy đủ</h3>
+<ul>
+<li>Chẩn đoán.</li>
+<li>Tiền sử bệnh.</li>
+<li>Dị ứng.</li>
+<li>Lịch sử khám và điều trị.</li>
+</ul>
+<h2 id="18-thuat-ngu-nghiep-vu">1.8 Thuật ngữ nghiệp vụ</h2>
+<table>
+<thead>
+<tr>
+<th>Thuật ngữ</th>
+<th>Giải thích</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bệnh nhân</td>
+<td>Người đặt lịch và sử dụng dịch vụ khám tại phòng khám</td>
+</tr>
+<tr>
+<td>Lịch hẹn</td>
+<td>Bản ghi thể hiện một lượt khám dự kiến của bệnh nhân với bác sĩ tại một thời điểm</td>
+</tr>
+<tr>
+<td>Đặt lịch</td>
+<td>Tạo một lịch hẹn mới</td>
+</tr>
+<tr>
+<td>Đổi lịch</td>
+<td>Thay đổi thời gian/bác sĩ của lịch hẹn theo quy định</td>
+</tr>
+<tr>
+<td>Hủy lịch</td>
+<td>Kết thúc một lịch hẹn trước khi diễn ra</td>
+</tr>
+<tr>
+<td>Khung giờ</td>
+<td>Khoảng thời gian được dùng để phân bổ lượt khám</td>
+</tr>
+<tr>
+<td>Sức chứa khung giờ</td>
+<td>Số lượng lịch tối đa được phép trong một khung giờ theo chính sách</td>
+</tr>
+<tr>
+<td>Ca làm việc</td>
+<td>Khoảng thời gian làm việc của bác sĩ/nhân viên trong ngày</td>
+</tr>
+<tr>
+<td>Lịch làm việc bác sĩ</td>
+<td>Các khoảng thời gian bác sĩ có thể tiếp nhận bệnh nhân</td>
+</tr>
+<tr>
+<td>Tiếp nhận/Check-in</td>
+<td>Ghi nhận bệnh nhân đã đến phòng khám</td>
+</tr>
+<tr>
+<td>Xác nhận lịch</td>
+<td>Ghi nhận rằng lịch hẹn được chấp nhận/thực hiện theo quy trình phòng khám</td>
+</tr>
+<tr>
+<td>Vắng mặt/No-show</td>
+<td>Bệnh nhân có lịch nhưng không đến; quy tắc xử lý cần khảo sát</td>
+</tr>
+<tr>
+<td>Đến trễ</td>
+<td>Bệnh nhân đến sau thời điểm hẹn; ngưỡng xử lý cần khảo sát</td>
+</tr>
+<tr>
+<td>Khám gấp</td>
+<td>Trường hợp cần ưu tiên; quy tắc xử lý cần stakeholder xác nhận</td>
+</tr>
+<tr>
+<td>Nhật ký/Audit log</td>
+<td>Bản ghi ai thực hiện thao tác gì và vào thời điểm nào</td>
+</tr>
+</tbody>
+</table>
+<h2 id="19-tu-viet-tat">1.9 Từ viết tắt</h2>
+<table>
+<thead>
+<tr>
+<th>Viết tắt</th>
+<th>Giải thích</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SRS</td>
+<td>Software Requirements Specification — Đặc tả yêu cầu phần mềm</td>
+</tr>
+<tr>
+<td>FR</td>
+<td>Functional Requirement — Yêu cầu chức năng</td>
+</tr>
+<tr>
+<td>NFR</td>
+<td>Non-functional Requirement — Yêu cầu phi chức năng</td>
+</tr>
+<tr>
+<td>STK</td>
+<td>Stakeholder</td>
+</tr>
+<tr>
+<td>SC</td>
+<td>Scenario</td>
+</tr>
+<tr>
+<td>TC</td>
+<td>Test Scenario/Test Case</td>
+</tr>
+<tr>
+<td>CR</td>
+<td>Change Request</td>
+</tr>
+<tr>
+<td>RBAC</td>
+<td>Role-Based Access Control — Phân quyền theo vai trò</td>
+</tr>
+<tr>
+<td>SMS</td>
+<td>Short Message Service</td>
+</tr>
+<tr>
+<td>UI</td>
+<td>User Interface — Giao diện người dùng</td>
+</tr>
+</tbody>
+</table>
+<h1 id="2-elicitation-plan-ke-hoach-thu-thap-yeu-cau">2. Elicitation Plan — Kế hoạch thu thập yêu cầu</h1>
+<h2 id="21-muc-tieu">2.1 Mục tiêu</h2>
+<ul>
+<li>Làm rõ quy trình đặt lịch, xác nhận, đổi/hủy lịch hiện tại.</li>
+<li>Xác định quy tắc phân bổ khung giờ và giới hạn bệnh nhân.</li>
+<li>Xác định cách xử lý đến trễ, vắng mặt, khám gấp và bác sĩ nghỉ.</li>
+<li>Xác định quyền xem/sửa dữ liệu theo từng vai trò.</li>
+<li>Xác định yêu cầu về hiệu năng, bảo mật, lưu trữ và độ ổn định.</li>
+</ul>
+<h2 id="22-ky-thuat-thu-thap-yeu-cau">2.2 Kỹ thuật thu thập yêu cầu</h2>
+<h3 id="221-phong-van">2.2.1 Phỏng vấn</h3>
+<ul>
+<li><strong>Mục tiêu:</strong> hiểu quy trình đặt lịch hiện tại, các quy tắc còn thiếu (khung giờ, giới hạn bệnh nhân, đến trễ, vắng mặt, khám gấp, bác sĩ nghỉ), <br />
+nhu cầu của từng vai trò và yêu cầu về tốc độ, bảo mật, lưu trữ.</li>
+<li><strong>Đối tượng:</strong> quản lý phòng khám, bác sĩ, nhân viên tiếp nhận (mỗi vai trò ít nhất 1 người).</li>
+<li><strong>Vai trò trong nhóm:</strong> 1 người hỏi, 1 người ghi chép, 1 người theo dõi và ghi câu hỏi phát sinh.</li>
+<li><strong>Thời lượng dự kiến:</strong> 30–45 phút/người.</li>
+<li><strong>Cách ghi nhận:</strong> biên bản mỗi buổi (ghi kèm mã câu hỏi), ghi âm nếu được đồng ý, gửi lại biên bản cho người được <br />
+hỏi xác nhận.</li>
+</ul>
+<h3 id="222-bang-cau-hoi">2.2.2 Bảng câu hỏi</h3>
+<ul>
+<li><strong>Mục tiêu:</strong> biết bệnh nhân đang đặt, đổi, hủy lịch thế nào, khai thông tin ra sao, muốn nhận thông báo qua kênh nào.</li>
+<li><strong>Đối tượng:</strong> bệnh nhân mới và cũ.</li>
+<li><strong>Mục tiêu mẫu:</strong> tối thiểu 20 phản hồi.</li>
+<li><strong>Vai trò trong nhóm:</strong> 1 người thiết kế phiếu, 1 người phát và thu, 1 người tổng hợp.</li>
+<li><strong>Thời lượng:</strong> dưới 5 phút/phiếu; thu trong 2–3 ngày.</li>
+<li><strong>Cách ghi nhận:</strong> Google Form ẩn danh hoặc phiếu giấy phát lúc bệnh nhân chờ khám; xuất bảng tổng hợp kết quả.</li>
+</ul>
+<h3 id="223-quan-sat">2.2.3 Quan sát</h3>
+<ul>
+<li><strong>Mục tiêu:</strong> xem cách nhân viên ghi lịch vào sổ, gọi xác nhận, tra cứu lịch, thông báo thay đổi và đưa danh sách <br />
+cho bác sĩ; tìm chỗ vướng hoặc dễ nhầm.</li>
+<li><strong>Đối tượng:</strong> công việc của nhân viên tiếp nhận trong một ca, ưu tiên giờ đông khách.</li>
+<li><strong>Vai trò trong nhóm:</strong>2 người quan sát, 1 người tổng hợp</li>
+<li><strong>Thời lượng:</strong> 2–3 giờ</li>
+<li><strong>Cách ghi nhận:</strong> bảng quan sát gồm giờ, việc nhân viên làm, công cụ dùng (sổ, điện thoại), thời gian, chỗ bị vướng;<br />
+ảnh chụp sổ phải che tên và số điện thoại bệnh nhân.</li>
+</ul>
+<h2 id="23-bo-cau-hoi-khao-sat">2.3 Bộ câu hỏi khảo sát</h2>
+<h3 id="231-cau-hoi-mo">2.3.1 Câu hỏi mở</h3>
+<p><strong>Chủ đề: Đặt lịch và xác nhận hiện tại</strong></p>
+<ul>
+<li><strong>Q-O1 — Nhân viên tiếp nhận:</strong> Anh/chị hãy kể từng bước từ lúc nhận cuộc gọi đặt lịch đến khi ghi sổ và gọi xác nhận. <br />
+Bước nào mất nhiều thời gian hoặc dễ nhầm nhất?</li>
+<li><strong>Q-O2 — Quản lý:</strong> Anh/chị muốn bệnh nhân đặt lịch nhanh, không phải gọi nhiều lần. <br />
+Hiện bệnh nhân thường phải gọi mấy lần, vì sao, và theo anh/chị thế nào là "nhanh"?</li>
+<li><strong>Q-O3 — Nhân viên tiếp nhận:</strong> Khi cần tìm một lịch đã ghi trong sổ, anh/chị làm thế nào, <br />
+mất bao lâu và hay gặp khó khăn gì?</li>
+</ul>
+<p><strong>Chủ đề: Tiếp nhận bệnh nhân</strong></p>
+<ul>
+<li><strong>Q-O4 — Bệnh nhân mới:</strong> Khi đến khám lần đầu, anh/chị phải khai những thông tin gì và mất bao lâu? <br />
+Phần nào anh/chị thấy bất tiện?</li>
+</ul>
+<p><strong>Chủ đề: Bác sĩ theo dõi lịch</strong></p>
+<ul>
+<li><strong>Q-O5 — Bác sĩ:</strong> Danh sách đầu ca hiện gồm những thông tin gì, và còn thiếu gì để anh/chị chuẩn bị? <br />
+"Hồ sơ cần chuẩn bị" cụ thể là những gì, cần biết trước bao lâu?</li>
+</ul>
+<p><strong>Chủ đề: Đổi/hủy lịch</strong></p>
+<ul>
+<li><strong>Q-O6 — Nhân viên tiếp nhận:</strong> Hãy kể một lần gần đây phải đổi hoặc hủy lịch. Anh/chị đã làm những thao tác nào, <br />
+và có ai bị bỏ sót thông tin không?</li>
+<li><strong>Q-O7 — Bệnh nhân:</strong> Khi cần đổi hoặc hủy lịch, anh/chị đã làm thế nào và gặp khó khăn gì? <br />
+Anh/chị mong muốn đổi lịch bằng cách nào?</li>
+<li><strong>Q-O8 — Quản lý:</strong> Khi bác sĩ nghỉ đột xuất, phòng khám xử lý ra sao và điều gì làm việc gọi từng bệnh nhân khó khăn?</li>
+</ul>
+<h3 id="232-cau-hoi-ong">2.3.2 Câu hỏi đóng</h3>
+<ul>
+<li><strong>Q-C1 — Bệnh nhân:</strong> Để đặt được lịch khám, anh/chị thường phải gọi mấy lần?<br />
+  1; 2; 3 lần trở lên</li>
+<li><strong>Q-C2 — Quản lý:</strong> Lịch do bệnh nhân tự đặt có cần nhân viên duyệt trước khi có hiệu lực không?<br />
+  Cần duyệt; Có hiệu lực ngay</li>
+<li><strong>Q-C3 — Nhân viên tiếp nhận:</strong> Bệnh nhân cũ có phải khai lại thông tin khi đến khám không?<br />
+  Có; Không</li>
+<li><strong>Q-C4 — Nhân viên tiếp nhận:</strong> Việc bệnh nhân đến phòng khám hiện có được ghi nhận không?<br />
+  Có, ghi sổ; Có, cách khác: …; Không</li>
+<li><strong>Q-C5 — Quản lý:</strong> Mỗi lượt khám có độ dài cố định không?<br />
+  Cố định (…) phút; Theo chuyên khoa; Theo bác sĩ</li>
+<li><strong>Q-C6 — Quản lý:</strong> Có giới hạn số bệnh nhân tối đa mỗi bác sĩ mỗi ca không?<br />
+  Có (…) bệnh nhân; Không</li>
+<li><strong>Q-C7 — Bác sĩ:</strong> Anh/chị muốn xem danh sách khám vào lúc nào?<br />
+  Đầu ca; Từ hôm trước; Cập nhật liên tục trong ca</li>
+<li><strong>Q-C8 — Quản lý:</strong> Bệnh nhân được đổi/hủy lịch chậm nhất trước giờ khám bao lâu?<br />
+  Sát giờ; Trước 2 giờ; Trước 24 giờ; Khác: …</li>
+<li><strong>Q-C9 — Bệnh nhân:</strong> Anh/chị muốn nhận thông báo qua kênh nào?<br />
+  SMS; Zalo; Email; Gọi điện</li>
+</ul>
+<h3 id="233-cau-hoi-ngoai-le-va-nfr">2.3.3 Câu hỏi ngoại lệ và NFR</h3>
+<p><strong>Ngoại lệ nghiệp vụ</strong></p>
+<ul>
+<li><strong>Q-X1:</strong> Bệnh nhân đến trễ bao nhiêu phút thì phải xếp lại/mất lượt? Ai quyết định?</li>
+<li><strong>Q-X2:</strong> Bệnh nhân vắng mặt không báo thì xử lý thế nào?</li>
+<li><strong>Q-X3:</strong> Ca khám gấp hoặc bệnh nhân không hẹn trước do ai quyết định và ảnh hưởng thế nào tới lịch đã đặt?</li>
+<li><strong>Q-X4:</strong> Khi bác sĩ nghỉ đột xuất, bệnh nhân được thông báo bằng kênh nào và có được chuyển bác sĩ/đổi ngày không?</li>
+<li><strong>Q-X5:</strong> Nếu hai người cùng chọn một khung giờ gần như đồng thời, hệ thống nên xử lý thế nào?</li>
+</ul>
+<p><strong>Yêu cầu phi chức năng</strong></p>
+<ul>
+<li><strong>Q-X6:</strong> Với từng vai trò, ai được xem/sửa thông tin nào? Có cần lưu ai sửa và sửa lúc nào không?</li>
+<li><strong>Q-X7:</strong> Giờ cao điểm có bao nhiêu người thao tác đồng thời? Thời gian phản hồi bao lâu là chấp nhận được?</li>
+<li><strong>Q-X8:</strong> Dữ liệu cần lưu bao lâu? Có quy định pháp lý nào? Có cần sao lưu định kỳ không?</li>
+<li><strong>Q-X9:</strong> Nếu hệ thống ngừng hoạt động trong giờ làm việc, gián đoạn tối đa chấp nhận được là bao lâu?</li>
+</ul>
+<h1 id="3-assumptions-dependencies-open-issues">3. Assumptions, Dependencies &amp; Open Issues</h1>
+<h2 id="31-gia-inh-a-ghi-nhan">3.1 Giả định đã ghi nhãn</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Giả định</th>
+<th>Cơ sở</th>
+<th>Trạng thái</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>A-01</code></td>
+<td>Trong prototype, mỗi khung giờ dùng sức chứa cấu hình; dữ liệu kiểm thử mặc định có thể dùng <code>N = 2</code></td>
+<td>Quy tắc sức chứa chưa được xác nhận</td>
+<td>Chờ <code>Q-01</code></td>
+</tr>
+<tr>
+<td><code>A-02</code></td>
+<td>Hệ thống được triển khai dạng web; nhân viên/bác sĩ dùng máy tính, bệnh nhân có thể dùng điện thoại</td>
+<td>Phù hợp mục tiêu truy cập từ xa nhưng chưa được stakeholder xác nhận</td>
+<td>Chờ STK-01</td>
+</tr>
+<tr>
+<td><code>A-03</code></td>
+<td>Giờ mở cửa cụ thể chưa xác định; hệ thống phải cho phép cấu hình ca làm việc thay vì hard-code</td>
+<td>Tình huống chỉ nói “mỗi ca”</td>
+<td>Chờ STK-01</td>
+</tr>
+<tr>
+<td><code>A-04</code></td>
+<td>Prototype dùng chính sách sao lưu mỗi ngày, RPO 24 giờ, RTO 4 giờ</td>
+<td>Ngưỡng lưu trữ/khôi phục chưa có</td>
+<td>Chờ <code>Q-09</code></td>
+</tr>
+<tr>
+<td><code>A-05</code></td>
+<td>Bộ trường bệnh nhân tối thiểu của prototype: họ tên, ngày sinh, số điện thoại</td>
+<td>Case không liệt kê trường bắt buộc</td>
+<td>Chờ <code>Q-05</code></td>
+</tr>
+<tr>
+<td><code>A-06</code></td>
+<td>Khi bác sĩ nghỉ, prototype cho phép nhân viên chọn một trong các hướng: đổi giờ, đổi bác sĩ phù hợp hoặc hủy</td>
+<td>Case chỉ xác nhận hiện tại phải gọi từng bệnh nhân</td>
+<td>Chờ <code>Q-X4</code></td>
+</tr>
+<tr>
+<td><code>A-07</code></td>
+<td>Prototype dùng 4 vai trò: Quản lý, Nhân viên tiếp nhận, Bác sĩ, Bệnh nhân</td>
+<td>Có 4 stakeholder chính; quyền chi tiết chưa xác nhận</td>
+<td>Chờ <code>Q-07</code></td>
+</tr>
+<tr>
+<td><code>A-08</code></td>
+<td>Mục tiêu hiệu năng prototype: tác vụ đọc phổ biến ≤ 2 giây ở tải thử nghiệm</td>
+<td>Chưa có ngưỡng stakeholder</td>
+<td>Chờ <code>Q-X7</code></td>
+</tr>
+<tr>
+<td><code>A-09</code></td>
+<td>Prototype kiểm thử tối thiểu 10 phiên đồng thời</td>
+<td>Số user đồng thời thực tế chưa có</td>
+<td>Chờ <code>Q-X7</code></td>
+</tr>
+<tr>
+<td><code>A-10</code></td>
+<td>Phiên đăng nhập prototype tự hết hạn sau 15 phút không hoạt động</td>
+<td>Chưa có chính sách bảo mật cụ thể</td>
+<td>Chờ <code>Q-X8</code></td>
+</tr>
+<tr>
+<td><code>A-11</code></td>
+<td>Mục tiêu usability prototype: bệnh nhân tự đặt lịch ≤ 6 bước, nhân viên đặt hộ ≤ 8 bước</td>
+<td>Chưa có ngưỡng usability từ stakeholder</td>
+<td>Chờ khảo sát</td>
+</tr>
+<tr>
+<td><code>A-12</code></td>
+<td>Prototype ghi nhật ký các thao tác thay đổi lịch và dữ liệu quan trọng</td>
+<td>Cần hỗ trợ truy vết thao tác nhưng stakeholder chưa xác nhận</td>
+<td>Chờ <code>Q-07</code></td>
+</tr>
+<tr>
+<td><code>A-13</code></td>
+<td>Prototype không lưu mật khẩu dạng plaintext; thông tin xác thực phải được bảo vệ bằng cơ chế phù hợp</td>
+<td>Quy tắc kỹ thuật bảo mật của prototype</td>
+<td>Chờ xác nhận chính sách bảo mật</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2>3.2 Câu hỏi chưa được stakeholder trả lời</h2>
+<table>
+<thead>
+<tr>
+<th>Mã</th>
+<th>Câu hỏi</th>
+<th>Hỏi ai</th>
+<th>Requirement bị ảnh hưởng</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Q-01</code></td>
+<td>Khung giờ chuẩn và sức chứa tối đa là bao nhiêu?</td>
+<td>STK-01, STK-03</td>
+<td>FR-02, FR-03</td>
+</tr>
+<tr>
+<td><code>Q-02</code></td>
+<td>Quy định đổi/hủy: báo trước bao lâu, có cần duyệt không?</td>
+<td>STK-01, STK-03, STK-04</td>
+<td>FR-05, FR-06</td>
+</tr>
+<tr>
+<td><code>Q-03</code></td>
+<td>Bệnh nhân đặt online xác minh danh tính bằng cách nào?</td>
+<td>STK-01, STK-04</td>
+<td>FR-01, FR-02, FR-10</td>
+</tr>
+<tr>
+<td><code>Q-04</code></td>
+<td>Quy trình mới có còn gọi điện xác nhận không?</td>
+<td>STK-01, STK-03</td>
+<td>FR-04, FR-11</td>
+</tr>
+<tr>
+<td><code>Q-05</code></td>
+<td>Trường dữ liệu bệnh nhân tối thiểu gồm những gì? Bệnh nền/dị ứng có thuộc phạm vi hay không?</td>
+<td>STK-01, STK-02</td>
+<td>FR-01, FR-08</td>
+</tr>
+<tr>
+<td><code>Q-06</code></td>
+<td>Quy tắc đến trễ, vắng mặt, khám gấp là gì?</td>
+<td>STK-01, STK-03</td>
+<td>FR-04, FR-09</td>
+</tr>
+<tr>
+<td><code>Q-07</code></td>
+<td>Ai được xem/sửa loại dữ liệu nào?</td>
+<td>STK-01, STK-03</td>
+<td>FR-10, NFR-04</td>
+</tr>
+<tr>
+<td><code>Q-08</code></td>
+<td>Kênh thông báo nào được chấp nhận và ai chịu chi phí?</td>
+<td>STK-01, STK-04</td>
+<td>FR-11</td>
+</tr>
+<tr>
+<td><code>Q-09</code></td>
+<td>Chính sách lưu trữ, sao lưu, RPO/RTO cụ thể là gì?</td>
+<td>STK-01</td>
+<td>NFR-05</td>
+</tr>
+</tbody>
+</table>
+<h2 id="33-dependencies">3.3 Dependencies</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Phụ thuộc</th>
+<th>Liên quan</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DEP-01</td>
+<td>Hệ thống phụ thuộc kết nối mạng để đồng bộ lịch và dữ liệu</td>
+<td>Operating Environment</td>
+</tr>
+<tr>
+<td>DEP-02</td>
+<td>Chức năng thông báo phụ thuộc kênh được stakeholder lựa chọn</td>
+<td>FR-11, Q-08</td>
+</tr>
+<tr>
+<td>DEP-03</td>
+<td>Sau CR-01, thanh toán phụ thuộc cổng thanh toán bên thứ ba</td>
+<td>FR-12, Q-CR01-01</td>
+</tr>
+<tr>
+<td>DEP-04</td>
+<td>Sau CR-01, khám trực tuyến phụ thuộc nền tảng/phương thức phiên khám được lựa chọn</td>
+<td>FR-14, Q-CR01-05</td>
+</tr>
+</tbody>
+</table>
+<h1 id="4-operating-environment">4. Operating Environment</h1>
+<ul>
+<li>Ứng dụng web.</li>
+<li>Nhân viên tiếp nhận và bác sĩ truy cập bằng trình duyệt trên máy tính.</li>
+<li>Bệnh nhân có thể truy cập bằng trình duyệt trên điện thoại hoặc máy tính.</li>
+<li>Hệ thống cần kết nối mạng để đồng bộ dữ liệu.</li>
+<li>Môi trường triển khai, hệ điều hành, trình duyệt hỗ trợ, cấu hình máy chủ và dịch vụ thông báo <strong>chưa được stakeholder xác nhận</strong>.</li>
+</ul>
+<h1 id="5-requirements-catalogue">5. Requirements Catalogue</h1>
+<h2 id="51-yeu-cau-chuc-nang">5.1 Yêu cầu chức năng</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Loại</th>
+<th>Nguồn</th>
+<th>Ưu tiên</th>
+<th>Phiên bản</th>
+<th>Mô tả</th>
+<th>Lý do</th>
+<th>Tiêu chí kiểm chứng</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>FR-01 — Quản lý thông tin bệnh nhân cơ bản</strong></td>
+<td>Chức năng</td>
+<td><code>F-CS</code>; <code>STK-02</code>; <code>STK-04</code>; <code>A-05</code>; <code>Q-05</code></td>
+<td>Must</td>
+<td>1.0</td>
+<td>Hệ thống phải cho phép tạo, tra cứu và cập nhật thông tin bệnh nhân phục vụ đặt lịch/tiếp nhận. Bộ trường prototype theo <code>A-05</code> cho đến khi <code>Q-05</code> được xác nhận.</td>
+<td>Bệnh nhân mới hiện chỉ khai thông tin khi đến phòng khám; bác sĩ cần thông tin để chuẩn bị.</td>
+<td>Với dữ liệu theo <code>A-05</code>, tạo được hồ sơ mới, tra cứu lại được và cập nhật không làm mất dữ liệu cũ ngoài trường được sửa.</td>
+</tr>
+<tr>
+<td><strong>FR-02 — Đặt lịch hẹn mới</strong></td>
+<td>Chức năng</td>
+<td><code>STK-01</code>; <code>STK-04</code>; <code>F-CS</code></td>
+<td>Must</td>
+<td>1.0</td>
+<td>Hệ thống phải cho phép chọn chuyên khoa/bác sĩ/ngày và chọn một khung giờ khả dụng để tạo lịch.</td>
+<td>Giảm phụ thuộc vào gọi điện và sổ giấy.</td>
+<td>Chỉ slot khả dụng mới chọn được; đặt thành công sinh đúng 1 lịch; lịch xuất hiện trong danh sách của nhân viên và bác sĩ liên quan.</td>
+</tr>
+<tr>
+<td><strong>FR-03 — Kiểm tra ràng buộc đặt lịch</strong></td>
+<td>Chức năng</td>
+<td><code>F-CS</code>; <code>A-01</code>; <code>Q-01</code>; <code>Q-X5</code></td>
+<td>Must</td>
+<td>1.0</td>
+<td>Hệ thống phải từ chối đặt lịch nếu vượt sức chứa cấu hình, bệnh nhân có lịch giao nhau hoặc bác sĩ không làm việc.</td>
+<td>Tránh tạo lịch không hợp lệ khi nhiều người thao tác.</td>
+<td>Với dataset <code>A-01</code>, khi slot đã đủ <code>N</code> lịch hợp lệ thì lịch tiếp theo bị từ chối và dữ liệu cũ không thay đổi.</td>
+</tr>
+<tr>
+<td><strong>FR-04 — Quản lý trạng thái lịch hẹn</strong></td>
+<td>Chức năng</td>
+<td><code>F-CS</code>; <code>STK-03</code>; <code>Q-04</code>; <code>Q-06</code></td>
+<td>Must</td>
+<td>1.0</td>
+<td>Hệ thống phải quản lý vòng đời lịch hẹn. Tập trạng thái chi tiết phải phù hợp quy trình đã xác nhận; prototype hỗ trợ tối thiểu Chờ xác nhận, Đã xác nhận, Đã đến, Hủy.</td>
+<td>Giúp nhiều nhân viên cùng thấy một trạng thái thống nhất.</td>
+<td>Mọi chuyển trạng thái được ghi thời điểm và người thực hiện; chuyển trạng thái không được cấu hình phải bị từ chối.</td>
+</tr>
+<tr>
+<td><strong>FR-05 — Đổi lịch hẹn</strong></td>
+<td>Chức năng</td>
+<td><code>STK-04</code>; <code>STK-03</code>; <code>Q-02</code></td>
+<td>Must</td>
+<td>1.0</td>
+<td>Hệ thống phải cho phép đổi một lịch chưa kết thúc sang slot hợp lệ khác theo chính sách phòng khám.</td>
+<td>Bệnh nhân muốn đổi lịch mà không phải đến tận nơi.</td>
+<td>Đổi thành công giải phóng slot cũ, chiếm slot mới và giữ mã lịch; nếu slot mới không còn khả dụng thì lịch cũ vẫn giữ nguyên.</td>
+</tr>
+<tr>
+<td><strong>FR-06 — Hủy lịch hẹn</strong></td>
+<td>Chức năng</td>
+<td><code>STK-04</code>; <code>STK-03</code>; <code>Q-02</code></td>
+<td>Must</td>
+<td>1.0</td>
+<td>Hệ thống phải cho phép hủy lịch chưa kết thúc theo chính sách phòng khám và giải phóng slot.</td>
+<td>Giữ dữ liệu lịch trống chính xác.</td>
+<td>Sau hủy, lịch có trạng thái Hủy và slot có thể được đặt lại; lịch hủy vẫn tra cứu được.</td>
+</tr>
+<tr>
+<td><strong>FR-07 — Quản lý lịch làm việc và lịch bị ảnh hưởng khi bác sĩ nghỉ</strong></td>
+<td>Chức năng</td>
+<td><code>STK-02</code>; <code>STK-03</code>; <code>F-CS</code>; <code>A-06</code>; <code>Q-X4</code></td>
+<td>Must</td>
+<td>1.0</td>
+<td>Hệ thống phải cho phép ghi lịch làm việc/nghỉ của bác sĩ và xác định các lịch hẹn bị ảnh hưởng. Hành động xử lý theo chính sách được xác nhận; prototype dùng <code>A-06</code>.</td>
+<td>Hiện nhân viên phải gọi từng bệnh nhân khi bác sĩ nghỉ.</td>
+<td>Đánh dấu bác sĩ nghỉ làm slot tương ứng không thể đặt mới; danh sách lịch bị ảnh hưởng được tạo đầy đủ.</td>
+</tr>
+<tr>
+<td><strong>FR-08 — Bác sĩ xem danh sách lịch khám</strong></td>
+<td>Chức năng</td>
+<td><code>STK-02</code>; <code>F-CS</code>; <code>Q-O5</code>; <code>Q-05</code></td>
+<td>Must</td>
+<td>1.0</td>
+<td>Hệ thống phải cho phép bác sĩ xem danh sách bệnh nhân theo ngày/ca và các thông tin đã được cấp quyền để chuẩn bị.</td>
+<td>Hiện bác sĩ nhận danh sách vào đầu ca.</td>
+<td>Chọn ngày/ca trả đúng các lịch của bác sĩ; không hiển thị dữ liệu ngoài quyền được cấu hình.</td>
+</tr>
+<tr>
+<td><strong>FR-09 — Tiếp nhận bệnh nhân đến khám</strong></td>
+<td>Chức năng</td>
+<td><code>F-CS</code>; <code>STK-03</code>; <code>Q-X1</code>; <code>Q-X2</code>; <code>Q-X3</code></td>
+<td>Must</td>
+<td>1.0</td>
+<td>Hệ thống phải cho phép nhân viên ghi nhận bệnh nhân đã đến. Các trạng thái đến trễ/vắng/khám gấp chỉ áp dụng theo business rule đã xác nhận.</td>
+<td>Hệ thống được yêu cầu hỗ trợ tiếp nhận bệnh nhân.</td>
+<td>Một lịch hợp lệ có thể được đánh dấu Đã đến; hệ thống lưu thời điểm và nhân viên thực hiện.</td>
+</tr>
+<tr>
+<td><strong>FR-10 — Quản lý tài khoản, vai trò và nhật ký</strong></td>
+<td>Chức năng</td>
+<td><code>F-CS</code>; <code>STK-01</code>; <code>A-07</code>; <code>A-12</code>; <code>Q-07</code></td>
+<td>Must</td>
+<td>1.0</td>
+<td>Hệ thống phải hỗ trợ tài khoản theo vai trò, kiểm tra quyền trước khi truy cập chức năng/dữ liệu và lưu nhật ký thao tác quan trọng.</td>
+<td>Quyền xem/sửa là nội dung bắt buộc cần làm rõ; hệ thống có nhiều loại người dùng.</td>
+<td>Thao tác ngoài quyền bị từ chối; thao tác cập nhật lịch tạo nhật ký gồm người thực hiện, thời điểm và đối tượng.</td>
+</tr>
+<tr>
+<td><strong>FR-11 — Thông báo thay đổi lịch</strong></td>
+<td>Chức năng</td>
+<td><code>STK-01</code>; <code>STK-03</code>; <code>STK-04</code>; <code>Q-08</code>; <code>F-CS</code></td>
+<td>Should</td>
+<td>1.0</td>
+<td>Hệ thống phải tạo thông báo khi lịch được tạo/đổi/hủy hoặc bị ảnh hưởng do bác sĩ nghỉ. Kênh gửi do <code>Q-08</code> quyết định.</td>
+<td>Giảm nhu cầu gọi điện thủ công và giúp bệnh nhân biết thay đổi.</td>
+<td>Mỗi sự kiện tạo đúng thông báo gắn đúng lịch; nội dung ngày/giờ/bác sĩ khớp dữ liệu lịch; trạng thái gửi được ghi lại nếu có tích hợp kênh gửi.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="52-yeu-cau-phi-chuc-nang">5.2 Yêu cầu phi chức năng</h2>
+<h3 id="nhom-a-hieu-nang-va-quy-mo">Nhóm A — Hiệu năng và quy mô</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Loại</th>
+<th>Nguồn</th>
+<th>Ưu tiên</th>
+<th>Phiên bản</th>
+<th>Mô tả</th>
+<th>Lý do</th>
+<th>Tiêu chí kiểm chứng</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>NFR-01 — Thời gian phản hồi</strong></td>
+<td>Hiệu năng</td>
+<td><code>STK-01</code>; <code>STK-03</code>; <code>A-08</code>; <code>Q-X7</code></td>
+<td>Must</td>
+<td>1.0</td>
+<td>Trong prototype, các màn hình tra cứu lịch phổ biến phải phản hồi theo ngưỡng <code>A-08</code>; ngưỡng production phải xác nhận qua khảo sát.</td>
+<td>Quy trình đặt lịch cần nhanh và không làm tăng thời gian thao tác.</td>
+<td>Với tải thử nghiệm chuẩn, 95% yêu cầu đọc lịch ≤ 2 giây theo <code>A-08</code>.</td>
+</tr>
+<tr>
+<td><strong>NFR-02 — Người dùng đồng thời</strong></td>
+<td>Hiệu năng</td>
+<td><code>F-CS</code>; <code>A-09</code>; <code>Q-X7</code></td>
+<td>Should</td>
+<td>1.0</td>
+<td>Prototype phải hỗ trợ ít nhất 10 phiên đồng thời mà không phát sinh lỗi chức năng.</td>
+<td>Cần kiểm tra hệ thống khi nhiều vai trò thao tác cùng lúc.</td>
+<td>Chạy 10 phiên đồng thời thực hiện tra cứu/đặt lịch; không có lỗi 5xx hoặc mất dữ liệu.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="nhom-b-bao-mat-va-du-lieu">Nhóm B — Bảo mật và dữ liệu</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Loại</th>
+<th>Nguồn</th>
+<th>Ưu tiên</th>
+<th>Phiên bản</th>
+<th>Mô tả</th>
+<th>Lý do</th>
+<th>Tiêu chí kiểm chứng</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>NFR-03 — Xác thực và phiên làm việc</strong></td>
+<td>Bảo mật</td>
+<td><code>F-CS</code>; <code>A-10</code>; <code>A-13</code>; <code>Q-X8</code></td>
+<td>Must</td>
+<td>1.0</td>
+<td>Các chức năng nội bộ phải yêu cầu đăng nhập; thông tin xác thực không được lưu dạng mật khẩu thuần; prototype hết phiên theo <code>A-10</code>.</td>
+<td>Hệ thống xử lý dữ liệu cá nhân và lịch khám.</td>
+<td>Tài khoản chưa đăng nhập không truy cập được màn hình nội bộ; phiên không hoạt động 15 phút hết hiệu lực theo <code>A-10</code>.</td>
+</tr>
+<tr>
+<td><strong>NFR-04 — Phân quyền dữ liệu</strong></td>
+<td>Bảo mật</td>
+<td><code>F-CS</code>; <code>A-07</code>; <code>Q-07</code></td>
+<td>Must</td>
+<td>1.0</td>
+<td>Mọi truy cập dữ liệu phải tuân theo ma trận quyền cấu hình theo vai trò.</td>
+<td>Quyền xem/chỉnh sửa là nội dung đề bài yêu cầu khảo sát.</td>
+<td>Test một thao tác được phép và một thao tác bị cấm cho từng vai trò trong ma trận quyền đã xác nhận.</td>
+</tr>
+<tr>
+<td><strong>NFR-05 — Sao lưu và khôi phục</strong></td>
+<td>Dữ liệu/Reliability</td>
+<td><code>F-CS</code>; <code>A-04</code>; <code>Q-09</code></td>
+<td>Should</td>
+<td>1.0</td>
+<td>Prototype sao lưu và khôi phục theo <code>A-04</code>; ngưỡng production phải được stakeholder xác nhận.</td>
+<td>Mất lịch làm gián đoạn vận hành.</td>
+<td>Thực hiện phục hồi từ bản sao lưu thử nghiệm; dữ liệu đối chiếu đúng và thời gian phục hồi không vượt <code>A-04</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="nhom-c-kha-dung">Nhóm C — Khả dụng</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Loại</th>
+<th>Nguồn</th>
+<th>Ưu tiên</th>
+<th>Phiên bản</th>
+<th>Mô tả</th>
+<th>Lý do</th>
+<th>Tiêu chí kiểm chứng</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>NFR-06 — Số bước đặt lịch</strong></td>
+<td>Usability</td>
+<td><code>STK-01</code>; <code>STK-03</code>; <code>STK-04</code>; <code>A-11</code></td>
+<td>Should</td>
+<td>1.0</td>
+<td>Prototype hướng tới bệnh nhân tự đặt lịch không quá 6 bước và nhân viên đặt hộ không quá 8 bước.</td>
+<td>Phản ánh mục tiêu đặt lịch nhanh.</td>
+<td>Chạy test usability với kịch bản chuẩn; số bước không vượt <code>A-11</code>.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="6-scenario-specifications">6. Scenario Specifications</h1>
+<h2 id="sc-01-benh-nhan-at-lich-thanh-cong">SC-01 — Bệnh nhân đặt lịch thành công</h2>
+<ul>
+<li><strong>Requirement liên quan:</strong> FR-01, FR-02, FR-03, FR-11</li>
+<li><strong>Tác nhân chính:</strong> Bệnh nhân</li>
+<li><strong>Tiền điều kiện:</strong> Có bác sĩ và lịch làm việc khả dụng; bệnh nhân có thể cung cấp thông tin cần thiết.</li>
+<li><strong>Kích hoạt:</strong> Bệnh nhân chọn chức năng đặt lịch.</li>
+</ul>
+<h3 id="luong-chinh">Luồng chính</h3>
+<ol>
+<li>Bệnh nhân chọn chuyên khoa hoặc bác sĩ.</li>
+<li>Hệ thống hiển thị ngày và khung giờ khả dụng.</li>
+<li>Bệnh nhân chọn một khung giờ.</li>
+<li>Hệ thống kiểm tra ràng buộc theo FR-03.</li>
+<li>Bệnh nhân nhập/xác nhận thông tin cần thiết.</li>
+<li>Hệ thống tạo lịch hẹn.</li>
+<li>Hệ thống cập nhật sức chứa khung giờ.</li>
+<li>Hệ thống hiển thị kết quả đặt lịch.</li>
+<li>Nếu FR-11 được cấu hình kênh gửi, hệ thống tạo thông báo tương ứng.</li>
+</ol>
+<h3 id="luong-thay-thengoai-le">Luồng thay thế/ngoại lệ</h3>
+<ul>
+<li><strong>A1 — Dữ liệu bệnh nhân không hợp lệ:</strong> Hệ thống chỉ rõ trường lỗi và không tạo lịch.</li>
+<li><strong>A2 — Slot vừa hết chỗ:</strong> Hệ thống từ chối tạo lịch và yêu cầu chọn slot khác.</li>
+<li><strong>A3 — Bác sĩ vừa được đánh dấu nghỉ:</strong> Hệ thống thông báo slot không còn khả dụng.</li>
+</ul>
+<h3 id="hau-ieu-kien">Hậu điều kiện</h3>
+<ul>
+<li><strong>Thành công:</strong> Có đúng một lịch hẹn mới.</li>
+<li><strong>Thất bại:</strong> Không tạo lịch; dữ liệu lịch hiện có không bị thay đổi.</li>
+</ul>
+<h2 id="sc-02-khung-gio-hoac-bac-si-khong-con-kha-dung">SC-02 — Khung giờ hoặc bác sĩ không còn khả dụng</h2>
+<ul>
+<li><strong>Requirement liên quan:</strong> FR-02, FR-03, FR-07</li>
+<li><strong>Tác nhân chính:</strong> Bệnh nhân</li>
+<li><strong>Tiền điều kiện:</strong> Bệnh nhân đang chọn lịch.</li>
+<li><strong>Kích hoạt:</strong> Bệnh nhân chọn một slot không còn khả dụng.</li>
+</ul>
+<h3 id="luong-chinh_1">Luồng chính</h3>
+<ol>
+<li>Bệnh nhân chọn bác sĩ/ngày.</li>
+<li>Hệ thống kiểm tra lịch làm việc và sức chứa.</li>
+<li>Hệ thống phát hiện slot không hợp lệ.</li>
+<li>Hệ thống từ chối thao tác đặt lịch.</li>
+<li>Hệ thống hiển thị lý do và tải lại danh sách slot khả dụng.</li>
+</ol>
+<h3 id="ngoai-le">Ngoại lệ</h3>
+<ul>
+<li><strong>A1 — Cạnh tranh đồng thời:</strong> Một người khác đặt thành công trước; giao dịch hiện tại bị từ chối và lịch cũ không bị ảnh hưởng.</li>
+<li><strong>A2 — Bác sĩ nghỉ đột xuất:</strong> Slot của bác sĩ không còn cho phép đặt.</li>
+</ul>
+<h3 id="hau-ieu-kien_1">Hậu điều kiện</h3>
+<p>Không có lịch không hợp lệ được tạo.</p>
+<h2 id="sc-03-benh-nhan-oi-hoac-huy-lich">SC-03 — Bệnh nhân đổi hoặc hủy lịch</h2>
+<ul>
+<li><strong>Requirement liên quan:</strong> FR-05, FR-06, FR-11</li>
+<li><strong>Tác nhân chính:</strong> Bệnh nhân</li>
+<li><strong>Tiền điều kiện:</strong> Bệnh nhân có một lịch chưa kết thúc và được phép thay đổi theo chính sách.</li>
+<li><strong>Kích hoạt:</strong> Bệnh nhân chọn Đổi lịch hoặc Hủy lịch.</li>
+</ul>
+<h3 id="luong-chinh-oi-lich">Luồng chính — Đổi lịch</h3>
+<ol>
+<li>Bệnh nhân mở lịch hiện tại.</li>
+<li>Bệnh nhân chọn Đổi lịch.</li>
+<li>Hệ thống hiển thị các slot hợp lệ.</li>
+<li>Bệnh nhân chọn slot mới.</li>
+<li>Hệ thống kiểm tra FR-03.</li>
+<li>Hệ thống chuyển lịch sang slot mới và giải phóng slot cũ.</li>
+<li>Hệ thống ghi lịch sử thay đổi.</li>
+<li>Hệ thống tạo thông báo theo FR-11 nếu được cấu hình.</li>
+</ol>
+<h3 id="luong-chinh-huy-lich">Luồng chính — Hủy lịch</h3>
+<ol>
+<li>Bệnh nhân mở lịch hiện tại.</li>
+<li>Bệnh nhân chọn Hủy.</li>
+<li>Hệ thống yêu cầu xác nhận.</li>
+<li>Hệ thống chuyển lịch sang trạng thái Hủy.</li>
+<li>Hệ thống giải phóng slot.</li>
+<li>Hệ thống tạo thông báo nếu được cấu hình.</li>
+</ol>
+<h3 id="ngoai-le_1">Ngoại lệ</h3>
+<ul>
+<li><strong>A1 — Quá hạn thay đổi:</strong> Hệ thống xử lý theo business rule được xác nhận từ <code>Q-02</code>; không tự áp dụng ngưỡng thời gian chưa được xác nhận.</li>
+<li><strong>A2 — Slot mới vừa hết chỗ:</strong> Hệ thống giữ nguyên lịch cũ.</li>
+</ul>
+<h3 id="hau-ieu-kien_2">Hậu điều kiện</h3>
+<ul>
+<li>Đổi thành công: lịch nằm ở slot mới.</li>
+<li>Hủy thành công: lịch có trạng thái Hủy và slot được giải phóng.</li>
+<li>Thất bại: lịch cũ giữ nguyên.</li>
+</ul>
+<h2 id="sc-04-bac-si-xem-danh-sach-lich-kham">SC-04 — Bác sĩ xem danh sách lịch khám</h2>
+<ul>
+<li><strong>Requirement liên quan:</strong> FR-08, FR-10, NFR-04</li>
+<li><strong>Tác nhân chính:</strong> Bác sĩ</li>
+<li><strong>Tiền điều kiện:</strong> Bác sĩ đã đăng nhập và có quyền xem lịch của mình.</li>
+<li><strong>Kích hoạt:</strong> Bác sĩ mở danh sách lịch khám theo ngày/ca.</li>
+</ul>
+<h3 id="luong-chinh_2">Luồng chính</h3>
+<ol>
+<li>Bác sĩ chọn ngày hoặc ca.</li>
+<li>Hệ thống kiểm tra quyền.</li>
+<li>Hệ thống hiển thị các lịch thuộc bác sĩ.</li>
+<li>Bác sĩ chọn một lịch.</li>
+<li>Hệ thống hiển thị thông tin bệnh nhân trong phạm vi được cấp quyền.</li>
+</ol>
+<h3 id="ngoai-le_2">Ngoại lệ</h3>
+<ul>
+<li>Truy cập lịch không thuộc quyền: hệ thống từ chối và ghi nhật ký.</li>
+</ul>
+<h3 id="hau-ieu-kien_3">Hậu điều kiện</h3>
+<p>Không thay đổi dữ liệu lịch; thao tác truy cập được kiểm soát theo quyền.</p>
+<h2 id="sc-05-bac-si-nghi-ot-xuat">SC-05 — Bác sĩ nghỉ đột xuất</h2>
+<ul>
+<li><strong>Requirement liên quan:</strong> FR-07, FR-11</li>
+<li><strong>Tác nhân chính:</strong> Nhân viên tiếp nhận/Quản lý</li>
+<li><strong>Tiền điều kiện:</strong> Bác sĩ có lịch làm việc và có lịch hẹn trong thời gian bị ảnh hưởng.</li>
+<li><strong>Kích hoạt:</strong> Người có quyền ghi nhận bác sĩ nghỉ.</li>
+</ul>
+<h3 id="luong-chinh_3">Luồng chính</h3>
+<ol>
+<li>Người dùng chọn bác sĩ và thời gian nghỉ.</li>
+<li>Hệ thống xác định các lịch hẹn bị ảnh hưởng.</li>
+<li>Hệ thống ngăn đặt lịch mới vào thời gian nghỉ.</li>
+<li>Hệ thống hiển thị danh sách lịch cần xử lý.</li>
+<li>Nhân viên áp dụng phương án được chính sách cho phép; prototype theo <code>A-06</code>.</li>
+<li>Hệ thống cập nhật các lịch tương ứng.</li>
+<li>Hệ thống tạo thông báo cho bệnh nhân theo FR-11 nếu có kênh gửi.</li>
+</ol>
+<h3 id="ngoai-le_3">Ngoại lệ</h3>
+<ul>
+<li>Không có lịch bị ảnh hưởng: hệ thống chỉ cập nhật lịch nghỉ.</li>
+<li>Không có slot/bác sĩ thay thế: nhân viên giữ lịch ở trạng thái cần xử lý hoặc hủy theo chính sách.</li>
+</ul>
+<h3 id="hau-ieu-kien_4">Hậu điều kiện</h3>
+<p>Không còn slot mới cho bác sĩ trong thời gian nghỉ; các lịch bị ảnh hưởng được nhận diện và có trạng thái xử lý rõ ràng.</p>
+<h2 id="sc-06-tiep-nhan-benh-nhan-en-kham">SC-06 — Tiếp nhận bệnh nhân đến khám</h2>
+<ul>
+<li>Requirement liên quan: FR-09</li>
+<li>Tác nhân chính: Nhân viên tiếp nhận</li>
+<li>Tiền điều kiện: Bệnh nhân có lịch hợp lệ.</li>
+<li>Kích hoạt: Bệnh nhân đến phòng khám.</li>
+</ul>
+<h3 id="luong-chinh_4">Luồng chính</h3>
+<ol>
+<li>Nhân viên tìm lịch của bệnh nhân.</li>
+<li>Hệ thống hiển thị lịch phù hợp.</li>
+<li>Nhân viên chọn Ghi nhận đã đến.</li>
+<li>Hệ thống cập nhật trạng thái Đã đến.</li>
+<li>Hệ thống lưu thời điểm và nhân viên thực hiện.</li>
+</ol>
+<h3 id="ngoai-le_4">Ngoại lệ</h3>
+<ul>
+<li>Không tìm thấy lịch: hệ thống không tự tạo lượt mới; xử lý theo quy trình được stakeholder xác nhận.</li>
+<li>Bệnh nhân đến trễ: xử lý theo Q-06.</li>
+</ul>
+<h3 id="hau-ieu-kien_5">Hậu điều kiện</h3>
+<p>Lịch được ghi nhận Đã đến hoặc giữ nguyên nếu thao tác thất bại.</p>
+<h1 id="7-validation-report">7. Validation Report</h1>
+<h2 id="71-phuong-phap-peer-review">7.1 Phương pháp peer review</h2>
+<p>Peer review chéo kiểm tra các thuộc tính:</p>
+<ul>
+<li>Tính đúng đắn.</li>
+<li>Tính đầy đủ.</li>
+<li>Tính nhất quán.</li>
+<li>Tính khả thi.</li>
+<li>Tính rõ ràng.</li>
+<li>Tính đo lường/kiểm chứng được.</li>
+<li>Khả năng truy vết nguồn.</li>
+</ul>
+<h2 id="72-van-e-phat-hien-va-quyet-inh-xu-ly">7.2 Vấn đề phát hiện và quyết định xử lý</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Vấn đề phát hiện</th>
+<th>Tiêu chí bị ảnh hưởng</th>
+<th>Quyết định</th>
+<th>Trạng thái</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>REV-01</code></td>
+<td>Bản cũ đưa doanh thu/chấm công vào “giá trị mong đợi” nhưng case không cung cấp nhu cầu này</td>
+<td>Đúng đắn, phạm vi</td>
+<td>Loại khỏi baseline</td>
+<td>Đã sửa</td>
+</tr>
+<tr>
+<td><code>REV-02</code></td>
+<td>Bản cũ coi bệnh nền/dị ứng/CCCD là trường bắt buộc dù case chưa xác nhận</td>
+<td>Đúng đắn, truy vết</td>
+<td>Chuyển thành <code>A-05</code>/<code>Q-05</code>; FR-01 chỉ yêu cầu thông tin cơ bản</td>
+<td>Đã sửa</td>
+</tr>
+<tr>
+<td><code>REV-03</code></td>
+<td>Bản cũ dùng sức chứa cố định 2 như sự thật</td>
+<td>Đúng đắn, đo lường</td>
+<td>Chuyển thành dataset prototype <code>A-01</code>; production chờ <code>Q-01</code></td>
+<td>Đã sửa</td>
+</tr>
+<tr>
+<td><code>REV-04</code></td>
+<td>FR cũ mô tả khám gấp và walk-in chi tiết dù đề yêu cầu khảo sát thêm</td>
+<td>Đúng đắn, phạm vi</td>
+<td>FR-09 đổi thành “tiếp nhận”; quy tắc trễ/vắng/khám gấp để <code>Q-06</code></td>
+<td>Đã sửa</td>
+</tr>
+<tr>
+<td><code>REV-05</code></td>
+<td>Bản cũ có NFR 2 giây, 10 user, 3 năm, 15 phút session nhưng không ghi rõ là giả định</td>
+<td>Truy vết, đo lường</td>
+<td>Đưa các ngưỡng vào <code>A-04</code>, <code>A-08</code>, <code>A-09</code>, <code>A-10</code></td>
+<td>Đã sửa</td>
+</tr>
+<tr>
+<td><code>REV-06</code></td>
+<td>Scenario cũ dùng mũi tên một dòng, chưa đánh số tương tác</td>
+<td>Rõ ràng, kiểm chứng</td>
+<td>Viết lại SC-01…SC-05 theo mẫu tác nhân/tiền điều kiện/kích hoạt/luồng</td>
+<td>Đã sửa</td>
+</tr>
+<tr>
+<td><code>REV-07</code></td>
+<td>Scenario đổi lịch cũ tự thêm “bên thứ 3 được ủy quyền” không có nguồn</td>
+<td>Đúng đắn</td>
+<td>Loại bỏ; chính sách quá hạn chuyển về <code>Q-02</code></td>
+<td>Đã sửa</td>
+</tr>
+<tr>
+<td><code>REV-08</code></td>
+<td>Thiếu bảng thuật ngữ và viết tắt</td>
+<td>Đầy đủ</td>
+<td>Bổ sung mục 1.8 và 1.9</td>
+<td>Đã sửa</td>
+</tr>
+<tr>
+<td><code>REV-09</code></td>
+<td>Bảng requirement cũ thiếu cột phiên bản theo biểu mẫu</td>
+<td>Đầy đủ, cấu trúc</td>
+<td>Bổ sung cột Phiên bản cho FR/NFR</td>
+<td>Đã sửa</td>
+</tr>
+<tr>
+<td><code>REV-10</code></td>
+<td>Bản cũ chưa có Validation Report, test scenarios, traceability matrix và CR-01</td>
+<td>Đầy đủ</td>
+<td>Bổ sung các mục 7, 8, 9, 10</td>
+<td>Đã sửa</td>
+</tr>
+<tr>
+<td><code>REV-11</code></td>
+<td>Out-of-scope cũ có thanh toán nhưng chưa nêu khám trực tuyến, trong khi CR-01 cố tình thêm hai nội dung này sau baseline</td>
+<td>Nhất quán</td>
+<td>Ghi rõ telemedicine và payment ngoài baseline 1.0</td>
+<td>Đã sửa</td>
+</tr>
+<tr>
+<td><code>REV-12</code></td>
+<td>Bản cũ mâu thuẫn giữa “hồ sơ bệnh nhân ngoài phạm vi” và FR bác sĩ mở hồ sơ</td>
+<td>Nhất quán</td>
+<td>Phân biệt thông tin hành chính cơ bản (in scope) với bệnh án lâm sàng đầy đủ (out of scope)</td>
+<td>Đã sửa</td>
+</tr>
+</tbody>
+</table>
+<h2 id="73-ket-luan-kiem-nghiem">7.3 Kết luận kiểm nghiệm</h2>
+<ul>
+<li><strong>Đúng đắn:</strong> các yêu cầu không còn tự coi dữ liệu chưa xác nhận là sự thật; các ngưỡng chưa xác nhận được gắn <code>A-xx</code>.</li>
+<li><strong>Đầy đủ:</strong> đã có ≥10 FR, ≥6 NFR thuộc ≥3 nhóm, ≥4 scenario, ≥8 review issue và ≥6 test scenario.</li>
+<li><strong>Nhất quán:</strong> scope baseline phân biệt rõ thông tin bệnh nhân cơ bản với bệnh án lâm sàng; telemedicine/payment nằm ngoài 1.0 và chỉ vào hệ thống qua CR-01.</li>
+<li><strong>Khả thi:</strong> core scope tập trung vào booking/reception/schedule; các tính năng mở rộng được tách khỏi baseline.</li>
+<li><strong>Rõ ràng:</strong> scenario dùng bước đánh số; thuật ngữ được định nghĩa.</li>
+<li><strong>Đo lường được:</strong> mỗi FR/NFR có tiêu chí kiểm chứng; các ngưỡng chưa được stakeholder xác nhận được ghi là giả định.</li>
+</ul>
+<h1 id="8-test-scenarios">8. Test Scenarios</h1>
+<h2 id="tc-01-at-lich-thanh-cong">TC-01 — Đặt lịch thành công</h2>
+<ul>
+<li><strong>Requirement:</strong> FR-02, FR-03</li>
+<li><strong>Tiền điều kiện:</strong> Có bác sĩ và slot khả dụng.</li>
+<li><strong>Bước chính:</strong> Chọn bác sĩ → chọn slot → nhập thông tin hợp lệ → xác nhận.</li>
+<li><strong>Kết quả mong đợi:</strong> Sinh đúng 1 lịch; slot giảm sức chứa; lịch xuất hiện trong danh sách liên quan.</li>
+</ul>
+<h2 id="tc-02-tu-choi-khi-slot-a-u-suc-chua">TC-02 — Từ chối khi slot đã đủ sức chứa</h2>
+<ul>
+<li><strong>Requirement:</strong> FR-03</li>
+<li><strong>Tiền điều kiện:</strong> Slot đã có <code>N</code> lịch hợp lệ theo cấu hình.</li>
+<li><strong>Bước chính:</strong> Thử tạo thêm lịch tại cùng slot.</li>
+<li><strong>Kết quả mong đợi:</strong> Hệ thống từ chối; dữ liệu lịch hiện có không thay đổi; hiển thị lý do.</li>
+</ul>
+<h2 id="tc-03-oi-lich-thanh-cong">TC-03 — Đổi lịch thành công</h2>
+<ul>
+<li><strong>Requirement:</strong> FR-05</li>
+<li><strong>Tiền điều kiện:</strong> Có lịch cũ và slot mới hợp lệ.</li>
+<li><strong>Bước chính:</strong> Mở lịch → Đổi → chọn slot mới → xác nhận.</li>
+<li><strong>Kết quả mong đợi:</strong> Giữ mã lịch; slot cũ được giải phóng; slot mới được chiếm.</li>
+</ul>
+<h2 id="tc-04-oi-lich-that-bai-do-canh-tranh-ong-thoi">TC-04 — Đổi lịch thất bại do cạnh tranh đồng thời</h2>
+<ul>
+<li><strong>Requirement:</strong> FR-03, FR-05</li>
+<li><strong>Tiền điều kiện:</strong> Slot mới vừa bị người khác đặt đủ sức chứa.</li>
+<li><strong>Bước chính:</strong> Người dùng xác nhận đổi sang slot vừa hết chỗ.</li>
+<li><strong>Kết quả mong đợi:</strong> Đổi bị từ chối; lịch cũ vẫn giữ nguyên.</li>
+</ul>
+<h2 id="tc-05-huy-lich-va-giai-phong-slot">TC-05 — Hủy lịch và giải phóng slot</h2>
+<ul>
+<li><strong>Requirement:</strong> FR-06</li>
+<li><strong>Tiền điều kiện:</strong> Có lịch chưa kết thúc.</li>
+<li><strong>Bước chính:</strong> Mở lịch → Hủy → xác nhận.</li>
+<li><strong>Kết quả mong đợi:</strong> Lịch chuyển Hủy; slot được giải phóng; lịch vẫn tra cứu được.</li>
+</ul>
+<h2 id="tc-06-ghi-nhan-bac-si-nghi">TC-06 — Ghi nhận bác sĩ nghỉ</h2>
+<ul>
+<li><strong>Requirement:</strong> FR-07</li>
+<li><strong>Tiền điều kiện:</strong> Bác sĩ có lịch hẹn trong thời gian được chọn.</li>
+<li><strong>Bước chính:</strong> Ghi nhận khoảng nghỉ.</li>
+<li><strong>Kết quả mong đợi:</strong> Không cho đặt lịch mới; tạo đúng danh sách lịch bị ảnh hưởng.</li>
+</ul>
+<h2 id="tc-07-bac-si-chi-xem-du-lieu-trong-quyen">TC-07 — Bác sĩ chỉ xem dữ liệu trong quyền</h2>
+<ul>
+<li><strong>Requirement:</strong> FR-08, FR-10, NFR-04</li>
+<li><strong>Tiền điều kiện:</strong> Có tài khoản bác sĩ và dữ liệu của nhiều bác sĩ.</li>
+<li><strong>Bước chính:</strong> Bác sĩ mở danh sách của mình và thử truy cập dữ liệu ngoài quyền.</li>
+<li><strong>Kết quả mong đợi:</strong> Dữ liệu được phép hiển thị; dữ liệu ngoài quyền bị từ chối.</li>
+</ul>
+<h2 id="tc-08-kiem-tra-thoi-gian-phan-hoi-prototype">TC-08 — Kiểm tra thời gian phản hồi prototype</h2>
+<ul>
+<li><strong>Requirement:</strong> NFR-01</li>
+<li><strong>Tiền điều kiện:</strong> Môi trường test và dataset chuẩn.</li>
+<li><strong>Bước chính:</strong> Thực hiện nhiều lần thao tác đọc lịch.</li>
+<li><strong>Kết quả mong đợi:</strong> Đạt ngưỡng <code>A-08</code>; nếu stakeholder thay đổi ngưỡng thì cập nhật test.</li>
+</ul>
+<h1 id="9-change-request-cr-01-kham-truc-tuyen-va-thanh-toan-truoc">9. Change Request CR-01 — Khám trực tuyến và thanh toán trước</h1>
+<h2 id="91-noi-dung-thay-oi">9.1 Nội dung thay đổi</h2>
+<p>Phòng khám bắt đầu cung cấp <strong>khám trực tuyến</strong>. Bệnh nhân phải <strong>thanh toán trước để xác nhận lịch</strong>; nếu bác sĩ hủy lịch, hệ thống phải <strong>hoàn tiền và thông báo cho bệnh nhân</strong>.</p>
+<h2 id="92-phan-tich-tac-ong">9.2 Phân tích tác động</h2>
+<table>
+<thead>
+<tr>
+<th>Thành phần</th>
+<th>Mức ảnh hưởng</th>
+<th>Thay đổi cần thực hiện</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Phạm vi hệ thống</td>
+<td>Cao</td>
+<td>Telemedicine và thanh toán chuyển từ Out of Scope sang In Scope</td>
+</tr>
+<tr>
+<td>FR-02 Đặt lịch</td>
+<td>Cao</td>
+<td>Bổ sung loại lịch: trực tiếp/trực tuyến</td>
+</tr>
+<tr>
+<td>FR-04 Trạng thái lịch</td>
+<td>Cao</td>
+<td>Lịch trực tuyến chỉ được xác nhận khi thanh toán thành công</td>
+</tr>
+<tr>
+<td>FR-06 Hủy lịch</td>
+<td>Cao</td>
+<td>Phân biệt hủy bởi bệnh nhân và hủy bởi bác sĩ để quyết định hoàn tiền</td>
+</tr>
+<tr>
+<td>FR-07 Bác sĩ nghỉ</td>
+<td>Cao</td>
+<td>Nếu bác sĩ hủy lịch trực tuyến đã thanh toán, kích hoạt hoàn tiền</td>
+</tr>
+<tr>
+<td>FR-11 Thông báo</td>
+<td>Cao</td>
+<td>Bổ sung thông báo thanh toán, hoàn tiền, thông tin phiên khám trực tuyến</td>
+</tr>
+<tr>
+<td>Dữ liệu</td>
+<td>Cao</td>
+<td>Thêm loại lịch, mã giao dịch, trạng thái thanh toán, số tiền, trạng thái hoàn tiền, tham chiếu phiên khám trực tuyến</td>
+</tr>
+<tr>
+<td>Scenario</td>
+<td>Cao</td>
+<td>SC-01, SC-03, SC-05 bị ảnh hưởng; cần thêm SC-07</td>
+</tr>
+<tr>
+<td>Test</td>
+<td>Cao</td>
+<td>Bổ sung test thanh toán, thất bại thanh toán, hoàn tiền và truy cập phiên online</td>
+</tr>
+<tr>
+<td>Bảo mật/NFR</td>
+<td>Cao</td>
+<td>Phát sinh yêu cầu về dữ liệu thanh toán và bảo vệ phiên khám trực tuyến</td>
+</tr>
+</tbody>
+</table>
+<h2 id="93-yeu-cau-moisua-oi">9.3 Yêu cầu mới/sửa đổi</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Loại</th>
+<th>Nguồn</th>
+<th>Ưu tiên</th>
+<th>Phiên bản</th>
+<th>Mô tả</th>
+<th>Tiêu chí kiểm chứng</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>FR-02 (sửa)</strong></td>
+<td>Chức năng</td>
+<td><code>CR-01</code>; <code>STK-04</code></td>
+<td>Must</td>
+<td>1.1</td>
+<td>Khi đặt lịch, hệ thống cho phép chọn hình thức khám Trực tiếp hoặc Trực tuyến nếu bác sĩ/dịch vụ hỗ trợ.</td>
+<td>Lịch lưu đúng loại khám; các slot không hỗ trợ online không thể chọn loại online.</td>
+</tr>
+<tr>
+<td><strong>FR-12 — Thanh toán trước cho lịch trực tuyến</strong></td>
+<td>Chức năng</td>
+<td><code>CR-01</code></td>
+<td>Must</td>
+<td>1.1</td>
+<td>Lịch trực tuyến phải có trạng thái thanh toán thành công trước khi chuyển sang Đã xác nhận.</td>
+<td>Thanh toán thất bại không xác nhận lịch; thanh toán thành công gắn đúng mã giao dịch với lịch.</td>
+</tr>
+<tr>
+<td><strong>FR-13 — Hoàn tiền khi bác sĩ hủy</strong></td>
+<td>Chức năng</td>
+<td><code>CR-01</code></td>
+<td>Must</td>
+<td>1.1</td>
+<td>Khi bác sĩ/phòng khám hủy lịch trực tuyến đã thanh toán, hệ thống phải tạo yêu cầu hoàn tiền và ghi trạng thái hoàn tiền.</td>
+<td>Một lịch đã thanh toán bị bác sĩ hủy sinh đúng một yêu cầu hoàn tiền; không hoàn tiền trùng.</td>
+</tr>
+<tr>
+<td><strong>FR-14 — Phiên khám trực tuyến</strong></td>
+<td>Chức năng</td>
+<td><code>CR-01</code></td>
+<td>Must</td>
+<td>1.1</td>
+<td>Hệ thống phải lưu/tham chiếu thông tin truy cập phiên khám trực tuyến cho lịch đã xác nhận.</td>
+<td>Chỉ bệnh nhân và bác sĩ liên quan truy cập được thông tin phiên; lịch chưa thanh toán không nhận quyền truy cập.</td>
+</tr>
+<tr>
+<td><strong>FR-11 (sửa)</strong></td>
+<td>Chức năng</td>
+<td><code>CR-01</code>; <code>STK-04</code></td>
+<td>Must</td>
+<td>1.1</td>
+<td>Bổ sung thông báo thanh toán thành công/thất bại, hoàn tiền và thông tin phiên khám online.</td>
+<td>Mỗi sự kiện phát sinh đúng thông báo gắn với lịch/giao dịch tương ứng.</td>
+</tr>
+<tr>
+<td><strong>NFR-07 — Bảo vệ giao dịch và phiên khám online</strong></td>
+<td>Phi chức năng — Bảo mật</td>
+<td><code>CR-01</code></td>
+<td>Must</td>
+<td>1.1</td>
+<td>Không lưu dữ liệu bí mật của phương thức thanh toán ngoài phạm vi cần thiết; dữ liệu phiên khám trực tuyến phải được kiểm soát truy cập.</td>
+<td>Tài khoản không liên quan không truy cập được thông tin giao dịch/phiên; log không chứa dữ liệu nhạy cảm bị cấm lưu.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="94-scenario-moi">9.4 Scenario mới</h2>
+<h3 id="sc-07-at-lich-kham-truc-tuyen-va-thanh-toan-truoc">SC-07 — Đặt lịch khám trực tuyến và thanh toán trước</h3>
+<ul>
+<li><strong>Requirement liên quan:</strong> FR-02 v1.1, FR-12, FR-14, FR-11 v1.1</li>
+<li><strong>Tác nhân chính:</strong> Bệnh nhân</li>
+<li><strong>Tiền điều kiện:</strong> Có slot hỗ trợ khám trực tuyến.</li>
+<li><strong>Kích hoạt:</strong> Bệnh nhân chọn hình thức khám trực tuyến.</li>
+</ul>
+<h4 id="luong-chinh_5">Luồng chính</h4>
+<ol>
+<li>Bệnh nhân chọn bác sĩ và slot hỗ trợ online.</li>
+<li>Hệ thống tạo lịch ở trạng thái Chờ thanh toán.</li>
+<li>Bệnh nhân thực hiện thanh toán qua phương thức được cấu hình.</li>
+<li>Hệ thống nhận kết quả thanh toán thành công.</li>
+<li>Hệ thống cập nhật trạng thái thanh toán.</li>
+<li>Hệ thống xác nhận lịch.</li>
+<li>Hệ thống tạo/tham chiếu thông tin phiên khám trực tuyến.</li>
+<li>Hệ thống gửi thông báo xác nhận và thông tin cần thiết.</li>
+</ol>
+<h4 id="ngoai-le_5">Ngoại lệ</h4>
+<ul>
+<li>Thanh toán thất bại: lịch không được xác nhận.</li>
+<li>Kết quả thanh toán không rõ do timeout: hệ thống không tự coi là thành công; cần cơ chế đối soát.</li>
+<li>Slot hết chỗ trước khi thanh toán hoàn tất: cần quy tắc giữ slot, là câu hỏi mở <code>Q-CR01-04</code>.</li>
+</ul>
+<h4 id="hau-ieu-kien_6">Hậu điều kiện</h4>
+<ul>
+<li>Thành công: lịch online đã xác nhận và có giao dịch hợp lệ.</li>
+<li>Thất bại: lịch không được xác nhận và không phát sinh trạng thái thanh toán sai.</li>
+</ul>
+<h2 id="95-cau-hoirui-ro-moi-can-lam-ro">9.5 Câu hỏi/rủi ro mới cần làm rõ</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Câu hỏi/rủi ro</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Q-CR01-01</code></td>
+<td>Sử dụng cổng thanh toán nào? Phương thức nào được hỗ trợ?</td>
+</tr>
+<tr>
+<td><code>Q-CR01-02</code></td>
+<td>Thời hạn hoàn tiền tối đa là bao lâu? Có phí hoàn tiền không?</td>
+</tr>
+<tr>
+<td><code>Q-CR01-03</code></td>
+<td>Nếu bệnh nhân tự hủy lịch online thì chính sách hoàn tiền thế nào?</td>
+</tr>
+<tr>
+<td><code>Q-CR01-04</code></td>
+<td>Khi bệnh nhân đang thanh toán, slot được giữ trong bao lâu để tránh người khác chiếm?</td>
+</tr>
+<tr>
+<td><code>Q-CR01-05</code></td>
+<td>Khám trực tuyến dùng nền tảng tích hợp nào và yêu cầu bảo mật/ghi hình ra sao?</td>
+</tr>
+<tr>
+<td><code>Q-CR01-06</code></td>
+<td>Nếu cổng thanh toán báo timeout nhưng tiền đã trừ, cơ chế đối soát xử lý thế nào?</td>
+</tr>
+</tbody>
+</table>
+<h1 id="10-traceability-matrix">10. Traceability Matrix</h1>
+<table>
+<thead>
+<tr>
+<th>Nhu cầu</th>
+<th>Stakeholder/Nguồn</th>
+<th>Requirement</th>
+<th>Scenario</th>
+<th>Test Scenario</th>
+<th>Change Request</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>N-01</code> Đặt lịch nhanh, giảm gọi nhiều lần</td>
+<td>STK-01, STK-04</td>
+<td>FR-02, FR-03, NFR-01, NFR-06</td>
+<td>SC-01, SC-02</td>
+<td>TC-01, TC-02, TC-08</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>N-02</code> Bác sĩ biết lịch và chuẩn bị trước</td>
+<td>STK-02</td>
+<td>FR-08, NFR-04</td>
+<td>SC-04</td>
+<td>TC-07</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>N-03</code> Lịch thay đổi phải đồng bộ</td>
+<td>STK-03</td>
+<td>FR-04, FR-05, FR-06, FR-11</td>
+<td>SC-03</td>
+<td>TC-03, TC-04, TC-05</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>N-04</code> Bệnh nhân đổi lịch từ xa</td>
+<td>STK-04</td>
+<td>FR-05</td>
+<td>SC-03</td>
+<td>TC-03, TC-04</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>N-05</code> Xử lý bác sĩ nghỉ</td>
+<td>F-CS, STK-03</td>
+<td>FR-07, FR-11</td>
+<td>SC-05</td>
+<td>TC-06</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>N-06</code> Tiếp nhận bệnh nhân</td>
+<td>F-CS, STK-03</td>
+<td>FR-01, FR-09</td>
+<td>SC-01</td>
+<td>TC-01</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>N-07</code> Kiểm soát quyền và truy vết</td>
+<td>F-CS, STK-01</td>
+<td>FR-10, NFR-03, NFR-04</td>
+<td>SC-04</td>
+<td>TC-07</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>N-08</code> Khám trực tuyến</td>
+<td>CR-01</td>
+<td>FR-02 v1.1, FR-14</td>
+<td>SC-07</td>
+<td>TC-12</td>
+<td>CR-01</td>
+</tr>
+<tr>
+<td><code>N-09</code> Thanh toán trước để xác nhận lịch online</td>
+<td>CR-01</td>
+<td>FR-12</td>
+<td>SC-06</td>
+<td>TC-09, TC-10</td>
+<td>CR-01</td>
+</tr>
+<tr>
+<td><code>N-10</code> Hoàn tiền khi bác sĩ hủy</td>
+<td>CR-01</td>
+<td>FR-13, FR-11 v1.1</td>
+<td>SC-05, SC-06</td>
+<td>TC-11</td>
+<td>CR-01</td>
+</tr>
+<tr>
+<td><code>N-11</code> Bảo vệ dữ liệu giao dịch/phiên online</td>
+<td>CR-01</td>
+<td>NFR-07</td>
+<td>SC-06</td>
+<td>TC-12</td>
+<td>CR-01</td>
+</tr>
+</tbody>
+</table>
+      </div>
+      <p class="footer-note">BT04 · Mini-SRS — Phòng khám An Tâm · Nhóm 13</p>
+    </article>
+  </main>
+</div>
+<script>
+// Wrap tables for horizontal scroll
+document.querySelectorAll('.content table').forEach(t => {
+  const wrap = document.createElement('div');
+  wrap.className = 'table-wrap';
+  t.parentNode.insertBefore(wrap, t);
+  wrap.appendChild(t);
+});
+</script>
+</body>
+</html>
