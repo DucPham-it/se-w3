@@ -16,13 +16,10 @@
 | Mã | Nguồn | Ý nghĩa |
 |---|---|---|
 | `F-CS` | Fact from Case Study | Dữ kiện được cung cấp trực tiếp trong tình huống Phòng khám An Tâm |
-| `STK-01` | Quản lý phòng khám | “Tôi muốn bệnh nhân đặt lịch nhanh, không phải gọi nhiều lần.” |
-| `STK-02` | Bác sĩ | “Tôi cần biết hôm nay ai đến khám và hồ sơ nào cần chuẩn bị.” |
-| `STK-03` | Nhân viên tiếp nhận | “Lịch thay đổi liên tục; nếu sửa ở sổ thì đôi khi người khác không biết.” |
-| `STK-04` | Bệnh nhân | “Tôi muốn đổi lịch mà không phải đến tận nơi.” |
+| `STK-xx | Stakeholder | Bên sử dụng dịch vụ |
 | `Q-Oxx` | Câu hỏi mở | Câu hỏi dùng trong khảo sát/phỏng vấn |
 | `Q-Cxx` | Câu hỏi đóng | Câu hỏi dùng trong khảo sát/phỏng vấn |
-| `Q-Xxx` | Câu hỏi ngoại lệ/NFR | Câu hỏi làm rõ ngoại lệ và yêu cầu phi chức năng |
+| `Q-Xxx` | Câu hỏi ngoại lệ | Câu hỏi làm rõ ngoại lệ và yêu cầu phi chức năng |
 | `Q-xx` | Open Issue | Câu hỏi chưa có câu trả lời chính thức từ stakeholder |
 | `A-xx` | Assumption | Giả định của nhóm, phải được ghi nhãn và xác nhận sau |
 | `FR-xx` | Functional Requirement | Yêu cầu chức năng |
@@ -86,7 +83,7 @@ Xây dựng hệ thống hỗ trợ **quản lý lịch khám và tiếp nhận 
 
 | ID | Stakeholder | Vai trò | Nhu cầu | Ảnh hưởng đến hệ thống |
 |---|---|---|---|---|
-| `STK-01` | Quản lý phòng khám | Quản lý vận hành | Bệnh nhân đặt lịch nhanh, không phải gọi nhiều lần | Quyết định chính sách, business rule và ưu tiên |
+| `STK-01` | Quản lý phòng khám | Quản lý vận hành | Bệnh nhân đặt lịch nhanh, không phải gọi nhiều lần | Quyết định chính sách, nghiệp vụ và ưu tiên |
 | `STK-02` | Bác sĩ | Thực hiện khám | Biết bệnh nhân nào đến và thông tin/hồ sơ nào cần thiết | Trực tiếp sử dụng lịch và danh sách khám |
 | `STK-03` | Nhân viên tiếp nhận | Quản lý lịch, tiếp nhận bệnh nhân | Cần nhìn thấy thay đổi lịch đồng bộ và xử lý lịch hằng ngày | Người thao tác thường xuyên với lịch |
 | `STK-04` | Bệnh nhân | Người sử dụng dịch vụ | Muốn đổi lịch mà không phải đến tận nơi | Người tạo, xem và thay đổi lịch hẹn |
@@ -163,27 +160,7 @@ Xây dựng hệ thống hỗ trợ **quản lý lịch khám và tiếp nhận 
    - Lịch sử khám và điều trị.
 
 
-## 1.8 Thuật ngữ nghiệp vụ
-
-| Thuật ngữ | Giải thích |
-|---|---|
-| Bệnh nhân | Người đặt lịch và sử dụng dịch vụ khám tại phòng khám |
-| Lịch hẹn | Bản ghi thể hiện một lượt khám dự kiến của bệnh nhân với bác sĩ tại một thời điểm |
-| Đặt lịch | Tạo một lịch hẹn mới |
-| Đổi lịch | Thay đổi thời gian/bác sĩ của lịch hẹn theo quy định |
-| Hủy lịch | Kết thúc một lịch hẹn trước khi diễn ra |
-| Khung giờ | Khoảng thời gian được dùng để phân bổ lượt khám |
-| Sức chứa khung giờ | Số lượng lịch tối đa được phép trong một khung giờ theo chính sách |
-| Ca làm việc | Khoảng thời gian làm việc của bác sĩ/nhân viên trong ngày |
-| Lịch làm việc bác sĩ | Các khoảng thời gian bác sĩ có thể tiếp nhận bệnh nhân |
-| Tiếp nhận/Check-in | Ghi nhận bệnh nhân đã đến phòng khám |
-| Xác nhận lịch | Ghi nhận rằng lịch hẹn được chấp nhận/thực hiện theo quy trình phòng khám |
-| Vắng mặt/No-show | Bệnh nhân có lịch nhưng không đến; quy tắc xử lý cần khảo sát |
-| Đến trễ | Bệnh nhân đến sau thời điểm hẹn; ngưỡng xử lý cần khảo sát |
-| Khám gấp | Trường hợp cần ưu tiên; quy tắc xử lý cần stakeholder xác nhận |
-| Nhật ký/Audit log | Bản ghi ai thực hiện thao tác gì và vào thời điểm nào |
-
-## 1.9 Từ viết tắt
+## 1.8 Thuật ngữ viết tắt
 
 | Viết tắt | Giải thích |
 |---|---|
@@ -218,8 +195,7 @@ nhu cầu của từng vai trò và yêu cầu về tốc độ, bảo mật, l�
 - **Đối tượng:** quản lý phòng khám, bác sĩ, nhân viên tiếp nhận (mỗi vai trò ít nhất 1 người).
 - **Vai trò trong nhóm:** 1 người hỏi, 1 người ghi chép, 1 người theo dõi và ghi câu hỏi phát sinh.
 - **Thời lượng dự kiến:** 30–45 phút/người.
-- **Cách ghi nhận:** biên bản mỗi buổi (ghi kèm mã câu hỏi), ghi âm nếu được đồng ý, gửi lại biên bản cho người được 
-hỏi xác nhận.
+- **Cách ghi nhận:** biên bản mỗi buổi kèm mã câu hỏi, ghi âm nếu được đồng ý, gửi lại biên bản cho người được hỏi xác nhận.
 
 ### 2.2.2 Bảng câu hỏi
 
@@ -246,53 +222,37 @@ cho bác sĩ; tìm chỗ vướng hoặc dễ nhầm.
 
 **Chủ đề: Đặt lịch và xác nhận hiện tại**
 
-- **Q-O1 — Nhân viên tiếp nhận:** Anh/chị hãy kể từng bước từ lúc nhận cuộc gọi đặt lịch đến khi ghi sổ và gọi xác nhận. 
-Bước nào mất nhiều thời gian hoặc dễ nhầm nhất?
-- **Q-O2 — Quản lý:** Anh/chị muốn bệnh nhân đặt lịch nhanh, không phải gọi nhiều lần. 
-Hiện bệnh nhân thường phải gọi mấy lần, vì sao, và theo anh/chị thế nào là "nhanh"?
-- **Q-O3 — Nhân viên tiếp nhận:** Khi cần tìm một lịch đã ghi trong sổ, anh/chị làm thế nào, 
-mất bao lâu và hay gặp khó khăn gì?
+- **Q-O1 — Nhân viên tiếp nhận:** Anh/chị hãy kể từng bước từ lúc nhận cuộc gọi đặt lịch đến khi ghi sổ và gọi xác nhận. Bước nào mất nhiều thời gian hoặc dễ nhầm nhất?
+- **Q-O2 — Quản lý:** Anh/chị muốn bệnh nhân đặt lịch nhanh, không phải gọi nhiều lần. Hiện bệnh nhân thường phải gọi mấy lần, vì sao, và theo anh/chị thế nào là "nhanh"?
+- **Q-O3 — Nhân viên tiếp nhận:** Khi cần tìm một lịch đã ghi trong sổ, anh/chị làm thế nào, mất bao lâu và hay gặp khó khăn gì?
 
 **Chủ đề: Tiếp nhận bệnh nhân**
 
-- **Q-O4 — Bệnh nhân mới:** Khi đến khám lần đầu, anh/chị phải khai những thông tin gì và mất bao lâu? 
-Phần nào anh/chị thấy bất tiện?
+- **Q-O4 — Bệnh nhân mới:** Khi đến khám lần đầu, anh/chị phải khai những thông tin gì và mất bao lâu? Phần nào anh/chị thấy bất tiện?
 
 **Chủ đề: Bác sĩ theo dõi lịch**
 
-- **Q-O5 — Bác sĩ:** Danh sách đầu ca hiện gồm những thông tin gì, và còn thiếu gì để anh/chị chuẩn bị? 
-"Hồ sơ cần chuẩn bị" cụ thể là những gì, cần biết trước bao lâu?
+- **Q-O5 — Bác sĩ:** Danh sách đầu ca hiện gồm những thông tin gì, và còn thiếu gì để anh/chị chuẩn bị? "Hồ sơ cần chuẩn bị" cụ thể là những gì, cần biết trước bao lâu?
 
 **Chủ đề: Đổi/hủy lịch**
 
-- **Q-O6 — Nhân viên tiếp nhận:** Hãy kể một lần gần đây phải đổi hoặc hủy lịch. Anh/chị đã làm những thao tác nào, 
-và có ai bị bỏ sót thông tin không?
-- **Q-O7 — Bệnh nhân:** Khi cần đổi hoặc hủy lịch, anh/chị đã làm thế nào và gặp khó khăn gì? 
-Anh/chị mong muốn đổi lịch bằng cách nào?
+- **Q-O6 — Nhân viên tiếp nhận:** Hãy kể một lần gần đây phải đổi hoặc hủy lịch. Anh/chị đã làm những thao tác nào, và có ai bị bỏ sót thông tin không?
+- **Q-O7 — Bệnh nhân:** Khi cần đổi hoặc hủy lịch, anh/chị đã làm thế nào và gặp khó khăn gì? Anh/chị mong muốn đổi lịch bằng cách nào?
 - **Q-O8 — Quản lý:** Khi bác sĩ nghỉ đột xuất, phòng khám xử lý ra sao và điều gì làm việc gọi từng bệnh nhân khó khăn?
 
 ### 2.3.2 Câu hỏi đóng
 
-- **Q-C1 — Bệnh nhân:** Để đặt được lịch khám, anh/chị thường phải gọi mấy lần?  
-  1; 2; 3 lần trở lên
-- **Q-C2 — Quản lý:** Lịch do bệnh nhân tự đặt có cần nhân viên duyệt trước khi có hiệu lực không?  
-  Cần duyệt; Có hiệu lực ngay
-- **Q-C3 — Nhân viên tiếp nhận:** Bệnh nhân cũ có phải khai lại thông tin khi đến khám không?  
-  Có; Không
-- **Q-C4 — Nhân viên tiếp nhận:** Việc bệnh nhân đến phòng khám hiện có được ghi nhận không?  
-  Có, ghi sổ; Có, cách khác: …; Không
-- **Q-C5 — Quản lý:** Mỗi lượt khám có độ dài cố định không?  
-  Cố định (…) phút; Theo chuyên khoa; Theo bác sĩ
-- **Q-C6 — Quản lý:** Có giới hạn số bệnh nhân tối đa mỗi bác sĩ mỗi ca không?  
-  Có (…) bệnh nhân; Không
-- **Q-C7 — Bác sĩ:** Anh/chị muốn xem danh sách khám vào lúc nào?  
-  Đầu ca; Từ hôm trước; Cập nhật liên tục trong ca
-- **Q-C8 — Quản lý:** Bệnh nhân được đổi/hủy lịch chậm nhất trước giờ khám bao lâu?  
-  Sát giờ; Trước 2 giờ; Trước 24 giờ; Khác: …
-- **Q-C9 — Bệnh nhân:** Anh/chị muốn nhận thông báo qua kênh nào?  
-  SMS; Zalo; Email; Gọi điện
+- **Q-C1 — Bệnh nhân:** Để đặt được lịch khám, anh/chị thường phải gọi mấy lần? 1; 2; 3 lần trở lên
+- **Q-C2 — Quản lý:** Lịch do bệnh nhân tự đặt có cần nhân viên duyệt trước khi có hiệu lực không? Cần duyệt; Có hiệu lực ngay
+- **Q-C3 — Nhân viên tiếp nhận:** Bệnh nhân cũ có phải khai lại thông tin khi đến khám không? Có; Không
+- **Q-C4 — Nhân viên tiếp nhận:** Việc bệnh nhân đến phòng khám hiện có được ghi nhận không? Có, ghi sổ; Có, cách khác: …; Không
+- **Q-C5 — Quản lý:** Mỗi lượt khám có độ dài cố định không? Cố định (…) phút; Theo chuyên khoa; Theo bác sĩ
+- **Q-C6 — Quản lý:** Có giới hạn số bệnh nhân tối đa mỗi bác sĩ mỗi ca không? Có (…) bệnh nhân; Không
+- **Q-C7 — Bác sĩ:** Anh/chị muốn xem danh sách khám vào lúc nào? Đầu ca; Từ hôm trước; Cập nhật liên tục trong ca
+- **Q-C8 — Quản lý:** Bệnh nhân được đổi/hủy lịch chậm nhất trước giờ khám bao lâu? Sát giờ; Trước 2 giờ; Trước 24 giờ; Khác: …
+- **Q-C9 — Bệnh nhân:** Anh/chị muốn nhận thông báo qua kênh nào? SMS; Zalo; Email; Gọi điện
 
-### 2.3.3 Câu hỏi ngoại lệ và NFR
+### 2.3.3 Câu hỏi ngoại lệ và yêu cầu phi chức năng
 
 **Ngoại lệ nghiệp vụ**
 
@@ -309,7 +269,7 @@ Anh/chị mong muốn đổi lịch bằng cách nào?
 - **Q-X8:** Dữ liệu cần lưu bao lâu? Có quy định pháp lý nào? Có cần sao lưu định kỳ không?
 - **Q-X9:** Nếu hệ thống ngừng hoạt động trong giờ làm việc, gián đoạn tối đa chấp nhận được là bao lâu?
 
-# 3. Assumptions, Dependencies & Open Issues
+# 3. Giả định, phụ thuộc và vấn đề mở
 
 ## 3.1 Giả định đã ghi nhãn
 
@@ -343,7 +303,7 @@ Anh/chị mong muốn đổi lịch bằng cách nào?
 | `Q-08` | Kênh thông báo nào được chấp nhận và ai chịu chi phí? | STK-01, STK-04 | FR-11 |
 | `Q-09` | Chính sách lưu trữ, sao lưu, RPO/RTO cụ thể là gì? | STK-01 | NFR-05 |
 
-## 3.3 Dependencies
+## 3.3 Phụ thuộc
 
 | ID | Phụ thuộc | Liên quan |
 |---|---|---|
@@ -352,7 +312,7 @@ Anh/chị mong muốn đổi lịch bằng cách nào?
 | DEP-03 | Sau CR-01, thanh toán phụ thuộc cổng thanh toán bên thứ ba | FR-12, Q-CR01-01 |
 | DEP-04 | Sau CR-01, khám trực tuyến phụ thuộc nền tảng/phương thức phiên khám được lựa chọn | FR-14, Q-CR01-05 |
 
-# 4. Operating Environment
+# 4. Môi trường vận hành
 
 - Ứng dụng web.
 - Nhân viên tiếp nhận và bác sĩ truy cập bằng trình duyệt trên máy tính.
@@ -361,7 +321,7 @@ Anh/chị mong muốn đổi lịch bằng cách nào?
 - Môi trường triển khai, hệ điều hành, trình duyệt hỗ trợ, cấu hình máy chủ và dịch vụ thông báo **chưa được stakeholder xác nhận**.
 
 
-# 5. Requirements Catalogue
+# 5. Các hạng mục yêu cầu
 
 ## 5.1 Yêu cầu chức năng
 
@@ -402,7 +362,7 @@ Anh/chị mong muốn đổi lịch bằng cách nào?
 |---|---|---|---|---|---|---|---|
 | **NFR-06 — Số bước đặt lịch** | Usability | `STK-01`; `STK-03`; `STK-04`; `A-11` | Should | 1.0 | Prototype hướng tới bệnh nhân tự đặt lịch không quá 6 bước và nhân viên đặt hộ không quá 8 bước. | Phản ánh mục tiêu đặt lịch nhanh. | Chạy test usability với kịch bản chuẩn; số bước không vượt `A-11`. |
 
-# 6. Scenario Specifications
+# 6. Bối cảnh yêu cầu
 
 ## SC-01 — Bệnh nhân đặt lịch thành công
 
@@ -432,7 +392,7 @@ Anh/chị mong muốn đổi lịch bằng cách nào?
 ### Hậu điều kiện
 
 - **Thành công:** Có đúng một lịch hẹn mới.
-- **Thất bại:** Không tạo lịch; dữ liệu lịch hiện có không bị thay đổi.
+- **Thất bại:** Không tạo lịch -> dữ liệu lịch hiện có không bị thay đổi.
 
 
 ## SC-02 — Khung giờ hoặc bác sĩ không còn khả dụng
@@ -489,7 +449,7 @@ Không có lịch không hợp lệ được tạo.
 
 ### Ngoại lệ
 
-- **A1 — Quá hạn thay đổi:** Hệ thống xử lý theo business rule được xác nhận từ `Q-02`; không tự áp dụng ngưỡng thời gian chưa được xác nhận.
+- **A1 — Quá hạn thay đổi:** Hệ thống xử lý theo business rule được xác nhận từ `Q-02`, không tự áp dụng ngưỡng thời gian chưa được xác nhận.
 - **A2 — Slot mới vừa hết chỗ:** Hệ thống giữ nguyên lịch cũ.
 
 ### Hậu điều kiện
@@ -592,14 +552,14 @@ Peer review chéo kiểm tra các thuộc tính:
 | `REV-01` | Bản cũ đưa doanh thu/chấm công vào “giá trị mong đợi” nhưng case không cung cấp nhu cầu này | Đúng đắn, phạm vi | Loại khỏi baseline | Đã sửa |
 | `REV-02` | Bản cũ coi bệnh nền/dị ứng/CCCD là trường bắt buộc dù case chưa xác nhận | Đúng đắn, truy vết | Chuyển thành `A-05`/`Q-05`; FR-01 chỉ yêu cầu thông tin cơ bản | Đã sửa |
 | `REV-03` | Bản cũ dùng sức chứa cố định 2 như sự thật | Đúng đắn, đo lường | Chuyển thành dataset prototype `A-01`; production chờ `Q-01` | Đã sửa |
-| `REV-04` | FR cũ mô tả khám gấp và walk-in chi tiết dù đề yêu cầu khảo sát thêm | Đúng đắn, phạm vi | FR-09 đổi thành “tiếp nhận”; quy tắc trễ/vắng/khám gấp để `Q-06` | Đã sửa |
+| `REV-04` | FR cũ mô tả khám gấp và giới thiệu chi tiết dù đề yêu cầu khảo sát thêm | Đúng đắn, phạm vi | FR-09 đổi thành “tiếp nhận”; quy tắc trễ/vắng/khám gấp để `Q-06` | Đã sửa |
 | `REV-05` | Bản cũ có NFR 2 giây, 10 user, 3 năm, 15 phút session nhưng không ghi rõ là giả định | Truy vết, đo lường | Đưa các ngưỡng vào `A-04`, `A-08`, `A-09`, `A-10` | Đã sửa |
 | `REV-06` | Scenario cũ dùng mũi tên một dòng, chưa đánh số tương tác | Rõ ràng, kiểm chứng | Viết lại SC-01…SC-05 theo mẫu tác nhân/tiền điều kiện/kích hoạt/luồng | Đã sửa |
 | `REV-07` | Scenario đổi lịch cũ tự thêm “bên thứ 3 được ủy quyền” không có nguồn | Đúng đắn | Loại bỏ; chính sách quá hạn chuyển về `Q-02` | Đã sửa |
 | `REV-08` | Thiếu bảng thuật ngữ và viết tắt | Đầy đủ | Bổ sung mục 1.8 và 1.9 | Đã sửa |
-| `REV-09` | Bảng requirement cũ thiếu cột phiên bản theo biểu mẫu | Đầy đủ, cấu trúc | Bổ sung cột Phiên bản cho FR/NFR | Đã sửa |
+| `REV-09` | Bảng yêu cầu  cũ thiếu cột phiên bản theo biểu mẫu | Đầy đủ, cấu trúc | Bổ sung cột Phiên bản cho FR/NFR | Đã sửa |
 | `REV-10` | Bản cũ chưa có Validation Report, test scenarios, traceability matrix và CR-01 | Đầy đủ | Bổ sung các mục 7, 8, 9, 10 | Đã sửa |
-| `REV-11` | Out-of-scope cũ có thanh toán nhưng chưa nêu khám trực tuyến, trong khi CR-01 cố tình thêm hai nội dung này sau baseline | Nhất quán | Ghi rõ telemedicine và payment ngoài baseline 1.0 | Đã sửa |
+| `REV-11` | Ngoại lệ cũ có thanh toán nhưng chưa nêu khám trực tuyến, trong khi CR-01 cố tình thêm hai nội dung này sau baseline | Nhất quán | Ghi rõ telemedicine và payment ngoài baseline 1.0 | Đã sửa |
 | `REV-12` | Bản cũ mâu thuẫn giữa “hồ sơ bệnh nhân ngoài phạm vi” và FR bác sĩ mở hồ sơ | Nhất quán | Phân biệt thông tin hành chính cơ bản (in scope) với bệnh án lâm sàng đầy đủ (out of scope) | Đã sửa |
 
 ## 7.3 Kết luận kiểm nghiệm
@@ -612,7 +572,7 @@ Peer review chéo kiểm tra các thuộc tính:
 - **Đo lường được:** mỗi FR/NFR có tiêu chí kiểm chứng; các ngưỡng chưa được stakeholder xác nhận được ghi là giả định.
 
 
-# 8. Test Scenarios
+# 8. Trường hợp kiểm thử
 
 ## TC-01 — Đặt lịch thành công
 
@@ -671,7 +631,8 @@ Peer review chéo kiểm tra các thuộc tính:
 - **Kết quả mong đợi:** Đạt ngưỡng `A-08`; nếu stakeholder thay đổi ngưỡng thì cập nhật test.
 
 
-# 9. Change Request CR-01 — Khám trực tuyến và thanh toán trước
+# 9. Yêu cầu thay đổi
+CR-01 — Khám trực tuyến và thanh toán trước
 
 ## 9.1 Nội dung thay đổi
 
@@ -759,7 +720,7 @@ Phòng khám bắt đầu cung cấp **khám trực tuyến**. Bệnh nhân ph�
 | `N-06` Tiếp nhận bệnh nhân | F-CS, STK-03 | FR-01, FR-09 | SC-01 | TC-01 | — |
 | `N-07` Kiểm soát quyền và truy vết | F-CS, STK-01 | FR-10, NFR-03, NFR-04 | SC-04 | TC-07 | — |
 | `N-08` Khám trực tuyến | CR-01 | FR-02 v1.1, FR-14 | SC-07 | TC-12 | CR-01 |
-| `N-09` Thanh toán trước để xác nhận lịch online | CR-01 | FR-12 | SC-07 | TC-09, TC-10 | CR-01 |
-| `N-10` Hoàn tiền khi bác sĩ hủy | CR-01 | FR-13, FR-11 v1.1 | SC-05, SC-07 | TC-11 | CR-01 |
-| `N-11` Bảo vệ dữ liệu giao dịch/phiên online | CR-01 | NFR-07 | SC-07 | TC-12 | CR-01 |
+| `N-09` Thanh toán trước để xác nhận lịch online | CR-01 | FR-12 | SC-06 | TC-09, TC-10 | CR-01 |
+| `N-10` Hoàn tiền khi bác sĩ hủy | CR-01 | FR-13, FR-11 v1.1 | SC-05, SC-06 | TC-11 | CR-01 |
+| `N-11` Bảo vệ dữ liệu giao dịch/phiên online | CR-01 | NFR-07 | SC-06 | TC-12 | CR-01 |
 
