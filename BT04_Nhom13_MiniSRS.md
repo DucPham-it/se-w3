@@ -759,7 +759,7 @@ Phòng khám bắt đầu cung cấp **khám trực tuyến**. Bệnh nhân ph�
 | `N-06` Tiếp nhận bệnh nhân | F-CS, STK-03 | FR-01, FR-09 | SC-01 | TC-01 | — |
 | `N-07` Kiểm soát quyền và truy vết | F-CS, STK-01 | FR-10, NFR-03, NFR-04 | SC-04 | TC-07 | — |
 | `N-08` Khám trực tuyến | CR-01 | FR-02 v1.1, FR-14 | SC-07 | TC-12 | CR-01 |
-| `N-09` Thanh toán trước để xác nhận lịch online | CR-01 | FR-12 | SC-06 | TC-09, TC-10 | CR-01 |
-| `N-10` Hoàn tiền khi bác sĩ hủy | CR-01 | FR-13, FR-11 v1.1 | SC-05, SC-06 | TC-11 | CR-01 |
-| `N-11` Bảo vệ dữ liệu giao dịch/phiên online | CR-01 | NFR-07 | SC-06 | TC-12 | CR-01 |
+| `N-09` Thanh toán trước để xác nhận lịch online | CR-01 | FR-12 | SC-07 | TC-09, TC-10 | CR-01 |
+| `N-10` Hoàn tiền khi bác sĩ hủy | CR-01 | FR-13, FR-11 v1.1 | SC-05, SC-07 | TC-11 | CR-01 |
+| `N-11` Bảo vệ dữ liệu giao dịch/phiên online | CR-01 | NFR-07 | SC-07 | TC-12 | CR-01 |
 
