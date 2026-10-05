@@ -16,7 +16,7 @@
 | Mã | Nguồn | Ý nghĩa |
 |---|---|---|
 | `F-CS` | Fact from Case Study | Dữ kiện được cung cấp trực tiếp trong tình huống Phòng khám An Tâm |
-| `STK-xx | Stakeholder | Bên sử dụng dịch vụ |
+| `STK-xx` | Stakeholder | Bên sử dụng dịch vụ |
 | `Q-Oxx` | Câu hỏi mở | Câu hỏi dùng trong khảo sát/phỏng vấn |
 | `Q-Cxx` | Câu hỏi đóng | Câu hỏi dùng trong khảo sát/phỏng vấn |
 | `Q-Xxx` | Câu hỏi ngoại lệ | Câu hỏi làm rõ ngoại lệ và yêu cầu phi chức năng |
@@ -134,30 +134,23 @@ Xây dựng hệ thống hỗ trợ **quản lý lịch khám và tiếp nhận 
 - Phân quyền theo vai trò.
 - Ghi nhận các thao tác thay đổi quan trọng.
 
-## 1.7 Out-Scope 
+## 1.7 Out-Scope (Ngoài phạm vi hệ thống)
 
-### A. Thanh toán viện phí trực tuyến
-- Thanh toán qua ngân hàng
-- Thanh toán qua ví điện tử
-### B. Hồ sơ thanh toán, hoàn tiền khi hủy
-- Lưu trữ lịch sử khám bệnh và hồ sơ bệnh nhân
-- Bệnh án (bệnh tiền sử, dị ứng thuốc)
-- Lịch sử khám bệnh ở bệnh viện an tâm
-### C. Hệ thống phân bổ bác sĩ theo triệu chứng.
-- Bệnh nhân có thể liên lạc bệnh viện để phân chuyên khoa trước thay vì phải đến gặp trực tiếp mới được phân khoa khám
-### D. Khám trực tuyến / Telemedicine
-- Video call hoặc phiên khám trực tuyến.
-- Cung cấp đường dẫn/phòng khám online.
+### A. Thanh toán trực tuyến và xử lý hoàn tiền
+- Thanh toán viện phí qua ngân hàng hoặc ví điện tử.
+- Xử lý giao dịch và hoàn tiền khi hủy lịch (chuyển vào phạm vi qua CR-01).
 
-### E. Thanh toán trực tuyến và hoàn tiền
-- Thanh toán qua ngân hàng hoặc ví điện tử.
-- Xử lý giao dịch và hoàn tiền khi hủy.
+### B. Bệnh án điện tử lâm sàng đầy đủ
+- Chẩn đoán chi tiết và phác đồ điều trị.
+- Tiền sử bệnh lý chuyên sâu và dị ứng thuốc.
+- Lưu trữ lịch sử khám chữa bệnh lâm sàng (hệ thống chỉ lưu thông tin hành chính cơ bản phục vụ đặt lịch và tiếp nhận).
 
-### F.  Bệnh án điện tử lâm sàng đầy đủ
-   - Chẩn đoán.
-   - Tiền sử bệnh.
-   - Dị ứng.
-   - Lịch sử khám và điều trị.
+### C. Khám trực tuyến / Telemedicine
+- Phiên khám hoặc video call trực tuyến.
+- Cung cấp phòng khám online (chuyển vào phạm vi qua CR-01).
+
+### D. Hệ thống phân bổ bác sĩ / tự chẩn đoán theo triệu chứng
+- Tiếp nhận và phân tích triệu chứng từ xa để tự động chỉ định chuyên khoa hoặc bác sĩ trước khi đến phòng khám.
 
 
 ## 1.8 Thuật ngữ viết tắt
@@ -211,8 +204,8 @@ nhu cầu của từng vai trò và yêu cầu về tốc độ, bảo mật, l�
 - **Mục tiêu:** xem cách nhân viên ghi lịch vào sổ, gọi xác nhận, tra cứu lịch, thông báo thay đổi và đưa danh sách 
 cho bác sĩ; tìm chỗ vướng hoặc dễ nhầm.
 - **Đối tượng:** công việc của nhân viên tiếp nhận trong một ca, ưu tiên giờ đông khách.
-- **Vai trò trong nhóm:**2 người quan sát, 1 người tổng hợp
-- **Thời lượng:** 2–3 giờ
+- **Vai trò trong nhóm:** 2 người quan sát, 1 người tổng hợp.
+- **Thời lượng:** 2–3 giờ.
 - **Cách ghi nhận:** bảng quan sát gồm giờ, việc nhân viên làm, công cụ dùng (sổ, điện thoại), thời gian, chỗ bị vướng;
 ảnh chụp sổ phải che tên và số điện thoại bệnh nhân.
 
@@ -511,10 +504,10 @@ Không còn slot mới cho bác sĩ trong thời gian nghỉ; các lịch bị �
 
 ## SC-06 — Tiếp nhận bệnh nhân đến khám
 
-- Requirement liên quan: FR-09
-- Tác nhân chính: Nhân viên tiếp nhận
-- Tiền điều kiện: Bệnh nhân có lịch hợp lệ.
-- Kích hoạt: Bệnh nhân đến phòng khám.
+- **Requirement liên quan:** FR-09
+- **Tác nhân chính:** Nhân viên tiếp nhận
+- **Tiền điều kiện:** Bệnh nhân có lịch hợp lệ.
+- **Kích hoạt:** Bệnh nhân đến phòng khám.
 
 ### Luồng chính
 1. Nhân viên tìm lịch của bệnh nhân.
@@ -556,8 +549,8 @@ Peer review chéo kiểm tra các thuộc tính:
 | `REV-05` | Bản cũ có NFR 2 giây, 10 user, 3 năm, 15 phút session nhưng không ghi rõ là giả định | Truy vết, đo lường | Đưa các ngưỡng vào `A-04`, `A-08`, `A-09`, `A-10` | Đã sửa |
 | `REV-06` | Scenario cũ dùng mũi tên một dòng, chưa đánh số tương tác | Rõ ràng, kiểm chứng | Viết lại SC-01…SC-05 theo mẫu tác nhân/tiền điều kiện/kích hoạt/luồng | Đã sửa |
 | `REV-07` | Scenario đổi lịch cũ tự thêm “bên thứ 3 được ủy quyền” không có nguồn | Đúng đắn | Loại bỏ; chính sách quá hạn chuyển về `Q-02` | Đã sửa |
-| `REV-08` | Thiếu bảng thuật ngữ và viết tắt | Đầy đủ | Bổ sung mục 1.8 và 1.9 | Đã sửa |
-| `REV-09` | Bảng yêu cầu  cũ thiếu cột phiên bản theo biểu mẫu | Đầy đủ, cấu trúc | Bổ sung cột Phiên bản cho FR/NFR | Đã sửa |
+| `REV-08` | Thiếu bảng thuật ngữ và viết tắt | Đầy đủ | Bổ sung mục 1.8 Thuật ngữ viết tắt | Đã sửa |
+| `REV-09` | Bảng yêu cầu cũ thiếu cột phiên bản theo biểu mẫu | Đầy đủ, cấu trúc | Bổ sung cột Phiên bản cho FR/NFR | Đã sửa |
 | `REV-10` | Bản cũ chưa có Validation Report, test scenarios, traceability matrix và CR-01 | Đầy đủ | Bổ sung các mục 7, 8, 9, 10 | Đã sửa |
 | `REV-11` | Ngoại lệ cũ có thanh toán nhưng chưa nêu khám trực tuyến, trong khi CR-01 cố tình thêm hai nội dung này sau baseline | Nhất quán | Ghi rõ telemedicine và payment ngoài baseline 1.0 | Đã sửa |
 | `REV-12` | Bản cũ mâu thuẫn giữa “hồ sơ bệnh nhân ngoài phạm vi” và FR bác sĩ mở hồ sơ | Nhất quán | Phân biệt thông tin hành chính cơ bản (in scope) với bệnh án lâm sàng đầy đủ (out of scope) | Đã sửa |
@@ -630,9 +623,38 @@ Peer review chéo kiểm tra các thuộc tính:
 - **Bước chính:** Thực hiện nhiều lần thao tác đọc lịch.
 - **Kết quả mong đợi:** Đạt ngưỡng `A-08`; nếu stakeholder thay đổi ngưỡng thì cập nhật test.
 
+## TC-09 — Thanh toán trước thành công cho lịch trực tuyến
+
+- **Requirement:** FR-12
+- **Tiền điều kiện:** Bệnh nhân đặt lịch trực tuyến, slot hợp lệ.
+- **Bước chính:** Chọn slot trực tuyến → thực hiện thanh toán thành công → hệ thống nhận phản hồi từ cổng thanh toán.
+- **Kết quả mong đợi:** Lịch chuyển trạng thái Đã xác nhận; lưu mã giao dịch hợp lệ; slot được giữ thành công.
+
+## TC-10 — Thanh toán trước thất bại hoặc hết hạn (timeout)
+
+- **Requirement:** FR-12
+- **Tiền điều kiện:** Bệnh nhân chọn lịch khám trực tuyến và chuyển đến cổng thanh toán.
+- **Bước chính:** Bệnh nhân hủy giao dịch hoặc cổng thanh toán báo timeout quá thời gian giữ slot.
+- **Kết quả mong đợi:** Lịch không được xác nhận; slot được giải phóng; thông báo lý do thanh toán thất bại.
+
+## TC-11 — Hoàn tiền tự động khi bác sĩ hủy lịch trực tuyến
+
+- **Requirement:** FR-13, FR-11 v1.1
+- **Tiền điều kiện:** Lịch khám trực tuyến đã thanh toán thành công. Bác sĩ báo nghỉ đột xuất hoặc hủy ca khám.
+- **Bước chính:** Hệ thống hoặc nhân viên ghi nhận hủy ca khám trực tuyến của bác sĩ.
+- **Kết quả mong đợi:** Hệ thống tự động tạo yêu cầu hoàn tiền; cập nhật trạng thái hoàn tiền; gửi thông báo hoàn tiền cho bệnh nhân; không phát sinh hoàn tiền trùng lặp.
+
+## TC-12 — Kiểm soát quyền truy cập phiên khám trực tuyến
+
+- **Requirement:** FR-14, NFR-07
+- **Tiền điều kiện:** Phiên khám trực tuyến đã được tạo sau khi thanh toán thành công.
+- **Bước chính:** Bệnh nhân và bác sĩ liên quan đăng nhập mở phiên khám; tài khoản không liên quan thử mở đường dẫn phiên khám.
+- **Kết quả mong đợi:** Đúng bệnh nhân và bác sĩ của ca khám được cấp quyền truy cập; tài khoản ngoài quyền hoặc lịch chưa thanh toán bị từ chối truy cập.
+
 
 # 9. Yêu cầu thay đổi
-CR-01 — Khám trực tuyến và thanh toán trước
+
+## CR-01 — Khám trực tuyến và thanh toán trước
 
 ## 9.1 Nội dung thay đổi
 
@@ -717,10 +739,10 @@ Phòng khám bắt đầu cung cấp **khám trực tuyến**. Bệnh nhân ph�
 | `N-03` Lịch thay đổi phải đồng bộ | STK-03 | FR-04, FR-05, FR-06, FR-11 | SC-03 | TC-03, TC-04, TC-05 | — |
 | `N-04` Bệnh nhân đổi lịch từ xa | STK-04 | FR-05 | SC-03 | TC-03, TC-04 | — |
 | `N-05` Xử lý bác sĩ nghỉ | F-CS, STK-03 | FR-07, FR-11 | SC-05 | TC-06 | — |
-| `N-06` Tiếp nhận bệnh nhân | F-CS, STK-03 | FR-01, FR-09 | SC-01 | TC-01 | — |
+| `N-06` Tiếp nhận bệnh nhân | F-CS, STK-03 | FR-01, FR-09 | SC-06 | TC-01 | — |
 | `N-07` Kiểm soát quyền và truy vết | F-CS, STK-01 | FR-10, NFR-03, NFR-04 | SC-04 | TC-07 | — |
 | `N-08` Khám trực tuyến | CR-01 | FR-02 v1.1, FR-14 | SC-07 | TC-12 | CR-01 |
-| `N-09` Thanh toán trước để xác nhận lịch online | CR-01 | FR-12 | SC-06 | TC-09, TC-10 | CR-01 |
-| `N-10` Hoàn tiền khi bác sĩ hủy | CR-01 | FR-13, FR-11 v1.1 | SC-05, SC-06 | TC-11 | CR-01 |
-| `N-11` Bảo vệ dữ liệu giao dịch/phiên online | CR-01 | NFR-07 | SC-06 | TC-12 | CR-01 |
+| `N-09` Thanh toán trước để xác nhận lịch online | CR-01 | FR-12 | SC-07 | TC-09, TC-10 | CR-01 |
+| `N-10` Hoàn tiền khi bác sĩ hủy | CR-01 | FR-13, FR-11 v1.1 | SC-05, SC-07 | TC-11 | CR-01 |
+| `N-11` Bảo vệ dữ liệu giao dịch/phiên online | CR-01 | NFR-07 | SC-07 | TC-12 | CR-01 |
 
